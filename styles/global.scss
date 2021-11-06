@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Open+Sans:wght@300;800&display=swap');
+@import 'reset';
+
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: #edf2f4;
+	color: #2b2d42;
+	min-width: 320px;
+}
+h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 800;
+}
+h2 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+p {
+	font-family: 'Lora', serif;
+}

@@ -1,0 +1,21 @@
+.container {
+	min-height: 100vh;
+	position: relative;
+	&::before {
+		content: 'Projects';
+		color: #8d99ae;
+		display: block;
+		position: absolute;
+		font-size: 3rem;
+		text-transform: uppercase;
+		z-index: -1;
+		top: -1.5rem;
+		left: 10%;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 800;
+		@media only screen and (min-width: 768px) {
+			font-size: 6rem;
+			top: -3rem;
+		}
+	}
+}

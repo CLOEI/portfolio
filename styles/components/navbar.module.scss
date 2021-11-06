@@ -1,0 +1,32 @@
+.container {
+	.burger {
+		position: fixed;
+		padding: 8px;
+		top: 5px;
+		right: 5px;
+		z-index: 999;
+		cursor: pointer;
+		div,
+		&::after,
+		&::before {
+			content: '';
+			display: block;
+			width: 30px;
+			height: 3px;
+			margin: 5px 0;
+			background-color: #212529;
+			transition: transform 0.3s;
+		}
+	}
+	.burger_active {
+		div {
+			transform: rotate(-45deg);
+		}
+		&::after {
+			transform: translateY(-8px) rotate(45deg);
+		}
+		&::before {
+			transform: translateY(8px) rotate(45deg);
+		}
+	}
+}
