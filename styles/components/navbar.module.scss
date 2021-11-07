@@ -29,4 +29,32 @@
 			transform: translateY(8px) rotate(45deg);
 		}
 	}
+	.menu {
+		position: fixed;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		z-index: 998;
+		background-color: #edf2f4;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		.profile {
+			margin: 0 auto;
+			max-width: 120px;
+			img {
+				border-radius: 50%;
+			}
+		}
+		li {
+			text-align: center;
+			padding: 1rem 0;
+			font-family: 'Open Sans', sans-serif;
+			cursor: pointer;
+			&:hover {
+				background-color: #e9ecef;
+			}
+		}
+	}
 }

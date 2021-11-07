@@ -1,0 +1,123 @@
+@mixin htmlTag {
+	display: block;
+	position: absolute;
+	font-size: 0.8rem;
+	font-style: italic;
+	font-family: 'Lora', serif;
+	font-weight: 300;
+	color: #6c757d;
+}
+
+.container {
+	padding: 100px 30px 90px;
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: space-around;
+	min-height: 100vh;
+	.text {
+		width: max-content;
+		h1 {
+			font-size: 3rem;
+			position: relative;
+			width: max-content;
+			span {
+				display: inline-block;
+				cursor: default;
+			}
+			&::before {
+				@include htmlTag();
+				content: '<h1>';
+				top: -15px;
+				left: -25px;
+			}
+			&::after {
+				@include htmlTag();
+				content: '</h1>';
+				bottom: -15px;
+				right: -25px;
+			}
+			@media only screen and (min-width: 1024px) {
+				font-size: 4rem;
+			}
+		}
+		p {
+			margin-top: 25px;
+			position: relative;
+			padding: 15px 0;
+			color: #6c757d;
+			&::before {
+				@include htmlTag();
+				content: '<p>';
+				top: -15px;
+				left: -25px;
+			}
+			&::after {
+				@include htmlTag();
+				content: '</p>';
+				bottom: -15px;
+				left: -25px;
+			}
+		}
+		.contact {
+			margin-top: 30px;
+			color: #2a1f62;
+			box-shadow: -10px -10px 30px 0 #fff, 10px 10px 30px 0 #1d0dca17;
+			border-width: 0;
+			padding: 16px;
+			transition: 0.2s;
+			cursor: pointer;
+			&:hover {
+				background: #f8f8ff;
+				box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+			}
+		}
+	}
+	.profile {
+		width: 250px;
+		display: none;
+		img {
+			border-radius: 50%;
+		}
+		@media only screen and (min-width: 768px) {
+			display: initial;
+		}
+	}
+	.scroll_left {
+		position: absolute;
+		bottom: 20px;
+		left: 15px;
+		display: none;
+		p {
+			writing-mode: vertical-lr;
+			margin-bottom: 5px;
+			animation: bounce 500ms infinite alternate;
+		}
+	}
+	.scroll_right {
+		position: absolute;
+		bottom: 20px;
+		right: 15px;
+		display: none;
+		p {
+			writing-mode: vertical-lr;
+			margin-bottom: 5px;
+			animation: bounce 500ms infinite alternate;
+		}
+	}
+	@media only screen and (min-width: 640px) {
+		.scroll_left,
+		.scroll_right {
+			display: block;
+		}
+	}
+}
+
+@keyframes bounce {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-15px);
+	}
+}

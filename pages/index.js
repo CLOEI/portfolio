@@ -1,33 +1,35 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import style from '../styles/home.module.scss';
 import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 import Projects from '../components/Projects';
 
-export default function Home() {
+export default function Home({ projects }) {
 	return (
 		<div className={style.container}>
 			<Head>
 				<title>Cendy</title>
 			</Head>
 			<Navbar />
-			<header className={style.header}>
-				<div className={style.text}>
-					<h1>
-						Hey,
-						<br />
-						I&apos;m Cendy
-					</h1>
-					<p>Always learning~</p>
-					<button className={style.contact} role="button">
-						Contact me
-					</button>
-				</div>
-				<div className={style.profile}>
-					<Image src="/images/profile.jpg" alt="author" width={460} height={460} />
-				</div>
-			</header>
-			<Projects />
+			<Header />
+			<Projects items={projects} />
 		</div>
 	);
+}
+
+export async function getStaticProps() {
+	const client = require('contentful').createClient({
+		space: process.env.SPACE_ID,
+		accessToken: process.env.DELIVERY_TOKEN,
+	});
+
+	const response = await client.getEntries({
+		content_type: 'projects',
+		order: 'sys.createdAt',
+	});
+	return {
+		props: {
+			projects: response.items,
+		},
+	};
 }
