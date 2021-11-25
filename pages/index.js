@@ -17,8 +17,10 @@ import {
 } from '@chakra-ui/react';
 import { FiGithub } from 'react-icons/fi';
 import { SiMongodb, SiExpress, SiReact, SiNodedotjs } from 'react-icons/si';
+import ProjectCard from '../components/ProjectCard';
 
-function Home() {
+function Home({ projects }) {
+	console.log(projects);
 	return (
 		<>
 			<Head>
@@ -36,8 +38,8 @@ function Home() {
 					alignItems={['center', 'flex-start']}
 					textAlign={['center', 'left']}
 				>
-					<Heading as="h1" fontFamily="Inter" fontWeight="extrabold">
-						Self-learn{' '}
+					<Heading as="h1" fontWeight="extrabold">
+						Self-taught{' '}
 						<Text as="span" color="blue.500">
 							web developer
 						</Text>
@@ -60,6 +62,19 @@ function Home() {
 				</Box>
 			</Flex>
 			<SkillStack />
+			<VStack alignItems="flex-start" my={6} mx={4}>
+				<Heading>Projects/&gt;</Heading>
+				<VStack alignItems="flex=start">
+					{projects.map((item) => {
+						return (
+							<ProjectCard
+								key={item.sys.id}
+								image={item.fields.image.fields.file.url}
+							/>
+						);
+					})}
+				</VStack>
+			</VStack>
 		</>
 	);
 }
@@ -116,3 +131,17 @@ function SkillStack() {
 }
 
 export default Home;
+
+export async function getStaticProps() {
+	const API = require('../API');
+
+	const projects = await API.getEntries({
+		content_type: 'projects',
+		limit: 5,
+	});
+	return {
+		props: {
+			projects: projects.items,
+		},
+	};
+}
