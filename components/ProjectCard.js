@@ -10,12 +10,16 @@ function ProjectCard({ data }) {
 	const description = data.fields.description;
 	const tags = data.fields.tags;
 	const image = data.fields.image.fields.file.url;
+	const repoLink = data.fields.repositoryLink;
+	const liveLink = data.fields.liveViewLink;
 
 	return (
 		<Wrapper>
 			<ContentWrapper>
 				<a
-					href="#"
+					href={liveLink}
+					target="_blank"
+					rel="noreferrer"
 					css={css`
 						text-decoration: none;
 						color: inherit;
@@ -33,7 +37,7 @@ function ProjectCard({ data }) {
 					<Text as="h3">{title}</Text>
 				</a>
 				<Text weight="400" as="p">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
+					{description}
 				</Text>
 				<TechList>
 					{tags.map((tag, i) => {
@@ -41,16 +45,22 @@ function ProjectCard({ data }) {
 					})}
 				</TechList>
 				<ExternalContainer>
-					<Link href="#">
+					<Link href={repoLink} target="_blank" rel="noreferrer">
 						<FiGithub />
 					</Link>
-					<Link href="#">
+					<Link href={liveLink} target="_blank" rel="noreferrer">
 						<FiExternalLink />
 					</Link>
 				</ExternalContainer>
 			</ContentWrapper>
 			<ImageWrapper>
-				<Image src={`https:${image}`} alt={title} objectFit="cover" layout="fill" />
+				<Image
+					src={`https:${image}`}
+					alt={title}
+					objectFit="cover"
+					layout="fill"
+					priority
+				/>
 			</ImageWrapper>
 		</Wrapper>
 	);
@@ -60,6 +70,7 @@ const Text = styled.h1`
 	font-family: 'Inter', sans-serif;
 	font-weight: ${(props) => props.weight || 800};
 	opacity: 87%;
+	line-height: 24px;
 `;
 const Tag = styled.ul`
 	font-family: 'Fira Code', monospace;
@@ -91,6 +102,13 @@ const ImageWrapper = styled.div`
 	span {
 		opacity: 0.65 !important;
 	}
+	&::before {
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 100%;
+		background-color: ${(props) => props.theme['02dp']};
+	}
 `;
 const TechList = styled.ul`
 	display: flex;
@@ -98,6 +116,7 @@ const TechList = styled.ul`
 	list-style-type: none;
 	margin: 30px 0;
 	padding: 0;
+	width: max-content;
 `;
 const ExternalContainer = styled.div`
 	display: flex;

@@ -9,7 +9,6 @@ import profile from '../public/profile.jpg';
 import ProjectCard from '../components/ProjectCard';
 
 function Home({ entries }) {
-	console.log(entries);
 	return (
 		<Wrapper>
 			<Head>
@@ -100,6 +99,7 @@ const ProfileWrapper = styled.div`
 		align-items: flex-start;
 		position: sticky;
 		top: 0;
+		align-self: start;
 	}
 `;
 const ProfileContainer = styled.div`
