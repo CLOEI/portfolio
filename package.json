@@ -8,15 +8,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "contentful": "^9.1.5",
     "next": "12.0.7",
     "normalize.css": "^8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "styled-components": "^5.3.3"
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.3.0",
     "eslint": "8.4.1",
     "eslint-config-next": "12.0.7"
   }

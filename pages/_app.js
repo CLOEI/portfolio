@@ -1,19 +1,28 @@
-import { createGlobalStyle } from 'styled-components';
+import { Global, css, ThemeProvider } from '@emotion/react';
 import 'normalize.css';
 
-const GlobalStyle = createGlobalStyle`
-  body{
-    background-color: #171923;
-    color: #EDF2F7;
-  }
-`;
+const globalStyle = (
+	<Global
+		styles={css`
+			body {
+				background-color: #121212;
+				color: #ffffff;
+			}
+		`}
+	/>
+);
+
+const theme = {
+	'01dp': '#1D1D1D',
+	'02dp': '#232323',
+};
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<>
-			<GlobalStyle />
+		<ThemeProvider theme={theme}>
+			{globalStyle}
 			<Component {...pageProps} />
-		</>
+		</ThemeProvider>
 	);
 }
 

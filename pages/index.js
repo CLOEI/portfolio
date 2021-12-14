@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { FiGithub, FiInstagram } from 'react-icons/fi';
 
 import Head from 'next/head';
@@ -31,7 +31,9 @@ function Home({ entries }) {
 					</SocialContainer>
 				</ProfileContainer>
 				<Text>I&apos;m a MERN stack developer</Text>
-				<ContactButton>Contact me</ContactButton>
+				<ContactButton>
+					<Text>Contact me</Text>
+				</ContactButton>
 			</ProfileWrapper>
 			<MainWrapper>
 				<Navigation>
@@ -74,7 +76,7 @@ const Wrapper = styled.div`
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-gap: 20px;
-	margin: 3px 3px 0 3px;
+	margin: 10px 10px 0 10px;
 	@media (min-width: 768px) {
 		grid-template-columns: 1fr 1fr;
 		grid-gap: 50px;
@@ -83,7 +85,8 @@ const Wrapper = styled.div`
 `;
 const Heading = styled.h1`
 	font-family: 'Inter', sans-serif;
-	font-weight: ${(props) => props.weight || 800}; ;
+	font-weight: ${(props) => props.weight || 800};
+	opacity: 87%;
 `;
 const Text = styled.p`
 	font-family: 'Inter', sans-serif;
@@ -95,6 +98,8 @@ const ProfileWrapper = styled.div`
 	align-items: center;
 	@media (min-width: 768px) {
 		align-items: flex-start;
+		position: sticky;
+		top: 0;
 	}
 `;
 const ProfileContainer = styled.div`
@@ -127,16 +132,19 @@ const SocialItem = styled.li`
 	place-items: center;
 	width: 35px;
 	height: 35px;
-	background-color: #2d3748;
+	background-color: ${(props) => props.theme['01dp']};
 	border-radius: 50%;
 	cursor: pointer;
 	user-select: none;
+	&:hover {
+		background-color: ${(props) => props.theme['02dp']};
+	}
 `;
 const ContactButton = styled.div`
 	font-family: 'Inter', sans-serif;
 	font-weight: 700;
-	padding: 15px;
-	background-color: #2d3748;
+	padding: 0 15px;
+	background-color: ${(props) => props.theme['02dp']};
 	margin-top: 15px;
 	cursor: pointer;
 	user-select: none;
@@ -145,6 +153,7 @@ const MainWrapper = styled.div``;
 const Navigation = styled.div`
 	display: flex;
 	align-items: center;
+	margin-left: -15px;
 	&::after {
 		content: '';
 		width: 100%;

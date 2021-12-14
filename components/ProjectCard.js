@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { css } from '@emotion/react';
 
 import Image from 'next/image';
 
@@ -12,77 +13,110 @@ function ProjectCard({ data }) {
 
 	return (
 		<Wrapper>
-			<ImageWrapper>
-				<Image src={`https:${image}`} layout="fill" objectFit="cover" alt={title} />
-			</ImageWrapper>
-			<InfoWrapper>
-				<Heading as="h3">Calculator</Heading>
-				<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
-				<Box>
+			<ContentWrapper>
+				<a
+					href="#"
+					css={css`
+						text-decoration: none;
+						color: inherit;
+						&::before {
+							content: '';
+							position: absolute;
+							top: 0;
+							right: 0;
+							left: 0;
+							bottom: 0;
+							z-index: -1;
+						}
+					`}
+				>
+					<Text as="h3">{title}</Text>
+				</a>
+				<Text weight="400" as="p">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
+				</Text>
+				<TechList>
 					{tags.map((tag, i) => {
 						return <Tag key={i}>{tag}</Tag>;
 					})}
-				</Box>
-				<Box>
-					<Link href="#" push>
+				</TechList>
+				<ExternalContainer>
+					<Link href="#">
 						<FiGithub />
 					</Link>
 					<Link href="#">
 						<FiExternalLink />
 					</Link>
-				</Box>
-			</InfoWrapper>
+				</ExternalContainer>
+			</ContentWrapper>
+			<ImageWrapper>
+				<Image src={`https:${image}`} alt={title} objectFit="cover" layout="fill" />
+			</ImageWrapper>
 		</Wrapper>
 	);
 }
 
-const Heading = styled.h1`
+const Text = styled.h1`
 	font-family: 'Inter', sans-serif;
-	font-weight: ${(props) => props.weight || 800}; ;
+	font-weight: ${(props) => props.weight || 800};
+	opacity: 87%;
 `;
-const Text = styled.p`
-	font-family: 'Inter', sans-serif;
-	font-weight: 400;
-	background-color: #2d3748;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	width: 100%;
-	padding: 15px;
-	margin: 0;
-`;
-const Tag = styled.p`
+const Tag = styled.ul`
 	font-family: 'Fira Code', monospace;
 	font-weight: 300;
 	font-size: 0.8rem;
-	padding: 0 4px;
+	padding: 0;
+	margin: 0px 10px 5px 0px;
+	opacity: 60%;
 `;
 const Wrapper = styled.div`
+	position: relative;
 	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	margin-bottom: 10px;
+	grid-template-columns: 1fr;
+	margin-bottom: 30px;
+	border-radius: 4px;
+`;
+const ContentWrapper = styled.div`
+	position: relative;
+	padding: 25px 25px 20px;
+	grid-area: 1/1/1/-1;
+	z-index: 2;
 `;
 const ImageWrapper = styled.div`
 	position: relative;
+	z-index: 1;
 	grid-area: 1/1/1/-1;
-	z-index: -1;
-	@media (min-width: 768px) {
-		grid-area: 1/6/1/1;
+	user-select: none;
+	mix-blend-mode: multiply;
+	span {
+		opacity: 0.65 !important;
 	}
 `;
-const InfoWrapper = styled.div`
-	grid-area: 1/1/1/-1;
-	@media (min-width: 768px) {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		grid-area: 1/5/1/-1;
-	}
-`;
-const Box = styled.div`
+const TechList = styled.ul`
 	display: flex;
+	flex-wrap: wrap;
+	list-style-type: none;
+	margin: 30px 0;
+	padding: 0;
+`;
+const ExternalContainer = styled.div`
+	display: flex;
+	align-items: center;
+	margin-left: -10px;
+	z-index: 3;
+	width: max-content;
 `;
 const Link = styled.a`
-	margin-right: ${(props) => (props.push ? '10px' : 0)};
+	text-decoration: none;
 	color: inherit;
+	padding: 10px;
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+	&:hover {
+		opacity: 60%;
+	}
 `;
 
 export default ProjectCard;
