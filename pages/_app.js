@@ -7,6 +7,14 @@ const globalStyle = (
 			body {
 				background-color: #121212;
 				color: #ffffff;
+				&::-webkit-scrollbar {
+					width: 12px;
+				}
+				&::-webkit-scrollbar-thumb {
+					background-color: #232323;
+					border-radius: 10px;
+					border: 3px solid #121212;
+				}
 			}
 		`}
 	/>
@@ -15,6 +23,7 @@ const globalStyle = (
 const theme = {
 	'01dp': '#1D1D1D',
 	'02dp': '#232323',
+	'03dp': '#242424',
 };
 
 function MyApp({ Component, pageProps }) {

@@ -2,8 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { css } from '@emotion/react';
+import { motion } from 'framer-motion';
 
 import Image from 'next/image';
+
+const cardVariant = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+	},
+};
 
 function ProjectCard({ data }) {
 	const title = data.fields.title;
@@ -14,7 +24,7 @@ function ProjectCard({ data }) {
 	const liveLink = data.fields.liveViewLink;
 
 	return (
-		<Wrapper>
+		<Wrapper variants={cardVariant}>
 			<ContentWrapper>
 				<a
 					href={liveLink}
@@ -72,7 +82,7 @@ const Text = styled.h1`
 	opacity: 87%;
 	line-height: 24px;
 `;
-const Tag = styled.ul`
+const Tag = styled.li`
 	font-family: 'Fira Code', monospace;
 	font-weight: 300;
 	font-size: 0.8rem;
@@ -80,12 +90,13 @@ const Tag = styled.ul`
 	margin: 0px 10px 5px 0px;
 	opacity: 60%;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled(motion.li)`
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr;
 	margin-bottom: 30px;
 	border-radius: 4px;
+	background-color: ${(props) => props.theme['01dp']};
 `;
 const ContentWrapper = styled.div`
 	position: relative;

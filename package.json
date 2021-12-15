@@ -11,6 +11,7 @@
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "contentful": "^9.1.5",
+    "framer-motion": "^5.4.5",
     "next": "12.0.7",
     "normalize.css": "^8.0.1",
     "react": "17.0.2",

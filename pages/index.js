@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiInstagram } from 'react-icons/fi';
+import { css } from '@emotion/react';
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -8,7 +10,46 @@ import Image from 'next/image';
 import profile from '../public/profile.jpg';
 import ProjectCard from '../components/ProjectCard';
 
+const projectVariant = {
+	initial: {
+		left: '-100%',
+	},
+	animate: {
+		left: 0,
+		transition: {
+			staggerChildren: 0.5,
+			type: 'tween',
+		},
+	},
+	exit: {
+		left: '-100%',
+		transition: {
+			type: 'tween',
+		},
+	},
+};
+const blogVariant = {
+	initial: {
+		left: '100%',
+	},
+	animate: {
+		left: 0,
+		transition: {
+			staggerChildren: 0.5,
+			type: 'tween',
+		},
+	},
+	exit: {
+		left: '100%',
+		transition: {
+			type: 'tween',
+		},
+	},
+};
+
 function Home({ entries }) {
+	const [currIsProject, setCurrIsProject] = useState(true);
+
 	return (
 		<Wrapper>
 			<Head>
@@ -22,35 +63,75 @@ function Home({ entries }) {
 					</Profile>
 					<SocialContainer>
 						<SocialItem>
-							<FiGithub />
+							<a href="https://github.com/CLOEI" target="_blank" rel="noreferrer">
+								<FiGithub />
+							</a>
 						</SocialItem>
 						<SocialItem>
-							<FiInstagram />
+							<a
+								href="https://www.instagram.com/cendy_ig/"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FiInstagram />
+							</a>
 						</SocialItem>
 					</SocialContainer>
 				</ProfileContainer>
 				<Text>I&apos;m a MERN stack developer</Text>
 				<ContactButton>
-					<Text>Contact me</Text>
+					<a href="mailto:cendyemail@gmail.com">
+						<Text>Contact me</Text>
+					</a>
 				</ContactButton>
 			</ProfileWrapper>
 			<MainWrapper>
-				<Navigation>
+				<Navigation as={motion.li} layout>
 					<NavigationItem>
-						<Heading weight={700} as="h2">
+						<Heading weight={700} as="h2" onClick={() => setCurrIsProject(true)}>
 							Projects
 						</Heading>
+						{currIsProject && <Underline layoutId="underline" />}
 					</NavigationItem>
 					<NavigationItem>
-						<Heading weight={700} as="h2">
+						<Heading weight={700} as="h2" onClick={() => setCurrIsProject(false)}>
 							Blog
 						</Heading>
+						{!currIsProject && <Underline layoutId="underline" />}
 					</NavigationItem>
 				</Navigation>
-				<div>
-					{entries.map((entry, i) => {
-						return <ProjectCard data={entry} key={i} />;
-					})}
+				<div
+					css={css`
+						overflow-x: hidden;
+					`}
+				>
+					<AnimatePresence exitBeforeEnter initial={false}>
+						{currIsProject ? (
+							<motion.ul
+								key="project"
+								initial="initial"
+								animate="animate"
+								exit="exit"
+								variants={projectVariant}
+							>
+								{entries.map((entry, i) => {
+									return <ProjectCard data={entry} key={i} />;
+								})}
+							</motion.ul>
+						) : (
+							<motion.ul
+								key="blog"
+								initial="initial"
+								animate="animate"
+								exit="exit"
+								variants={blogVariant}
+							>
+								{entries.map((entry, i) => {
+									return <ProjectCard data={entry} key={i} />;
+								})}
+							</motion.ul>
+						)}
+					</AnimatePresence>
 				</div>
 			</MainWrapper>
 		</Wrapper>
@@ -98,7 +179,7 @@ const ProfileWrapper = styled.div`
 	@media (min-width: 768px) {
 		align-items: flex-start;
 		position: sticky;
-		top: 0;
+		top: 20px;
 		align-self: start;
 	}
 `;
@@ -128,14 +209,17 @@ const SocialContainer = styled.ul`
 	grid-gap: 5px;
 `;
 const SocialItem = styled.li`
-	display: grid;
-	place-items: center;
-	width: 35px;
-	height: 35px;
 	background-color: ${(props) => props.theme['01dp']};
 	border-radius: 50%;
 	cursor: pointer;
 	user-select: none;
+	a {
+		display: grid;
+		place-items: center;
+		color: inherit;
+		width: 35px;
+		height: 35px;
+	}
 	&:hover {
 		background-color: ${(props) => props.theme['02dp']};
 	}
@@ -148,8 +232,18 @@ const ContactButton = styled.div`
 	margin-top: 15px;
 	cursor: pointer;
 	user-select: none;
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 `;
-const MainWrapper = styled.div``;
+const MainWrapper = styled.div`
+	ul {
+		position: relative;
+		list-style-type: none;
+		padding: 0;
+	}
+`;
 const Navigation = styled.div`
 	display: flex;
 	align-items: center;
@@ -158,13 +252,23 @@ const Navigation = styled.div`
 		content: '';
 		width: 100%;
 		height: 1px;
-		background-color: #edf2f7;
+		background-color: ${(props) => props.theme['02dp']};
 	}
 `;
 const NavigationItem = styled.div`
+	position: relative;
 	padding: 0 15px;
 	cursor: pointer;
 	user-select: none;
+`;
+
+const Underline = styled(motion.div)`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	margin-left: -10px;
+	background-color: ${(props) => props.theme['03dp']};
 `;
 
 export default Home;
