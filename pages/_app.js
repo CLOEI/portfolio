@@ -1,4 +1,10 @@
 import { Global, css, ThemeProvider } from '@emotion/react';
+
+import '@fontsource/fira-code/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+
 import 'normalize.css';
 
 const globalStyle = (

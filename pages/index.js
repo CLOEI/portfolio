@@ -12,17 +12,17 @@ import ProjectCard from '../components/ProjectCard';
 
 const projectVariant = {
 	initial: {
-		left: '-100%',
+		x: '-100%',
 	},
 	animate: {
-		left: 0,
+		x: 0,
 		transition: {
 			staggerChildren: 0.5,
 			type: 'tween',
 		},
 	},
 	exit: {
-		left: '-100%',
+		x: '-100%',
 		transition: {
 			type: 'tween',
 		},
@@ -30,17 +30,17 @@ const projectVariant = {
 };
 const blogVariant = {
 	initial: {
-		left: '100%',
+		x: '100%',
 	},
 	animate: {
-		left: 0,
+		x: 0,
 		transition: {
 			staggerChildren: 0.5,
 			type: 'tween',
 		},
 	},
 	exit: {
-		left: '100%',
+		x: '100%',
 		transition: {
 			type: 'tween',
 		},
@@ -53,7 +53,7 @@ function Home({ entries }) {
 	return (
 		<Wrapper>
 			<Head>
-				<title>Cendy/&gt;</title>
+				<title>Cendy</title>
 			</Head>
 			<ProfileWrapper>
 				<Heading>Cendy</Heading>
@@ -86,15 +86,15 @@ function Home({ entries }) {
 				</ContactButton>
 			</ProfileWrapper>
 			<MainWrapper>
-				<Navigation as={motion.li} layout>
-					<NavigationItem>
-						<Heading weight={700} as="h2" onClick={() => setCurrIsProject(true)}>
+				<Navigation as={motion.ul} layout>
+					<NavigationItem onClick={() => setCurrIsProject(true)}>
+						<Heading weight={700} as="h2">
 							Projects
 						</Heading>
 						{currIsProject && <Underline layoutId="underline" />}
 					</NavigationItem>
-					<NavigationItem>
-						<Heading weight={700} as="h2" onClick={() => setCurrIsProject(false)}>
+					<NavigationItem onClick={() => setCurrIsProject(false)}>
+						<Heading weight={700} as="h2">
 							Blog
 						</Heading>
 						{!currIsProject && <Underline layoutId="underline" />}
@@ -244,10 +244,11 @@ const MainWrapper = styled.div`
 		padding: 0;
 	}
 `;
-const Navigation = styled.div`
+const Navigation = styled.ul`
 	display: flex;
 	align-items: center;
-	margin-left: -15px;
+	list-style-type: none;
+	margin: 0;
 	&::after {
 		content: '';
 		width: 100%;
@@ -255,7 +256,7 @@ const Navigation = styled.div`
 		background-color: ${(props) => props.theme['02dp']};
 	}
 `;
-const NavigationItem = styled.div`
+const NavigationItem = styled.li`
 	position: relative;
 	padding: 0 15px;
 	cursor: pointer;
@@ -264,10 +265,9 @@ const NavigationItem = styled.div`
 
 const Underline = styled(motion.div)`
 	position: absolute;
-	bottom: 0;
 	width: 100%;
 	height: 2px;
-	margin-left: -10px;
+	left: 0;
 	background-color: ${(props) => props.theme['03dp']};
 `;
 
