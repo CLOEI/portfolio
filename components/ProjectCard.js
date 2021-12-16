@@ -96,6 +96,7 @@ const Wrapper = styled(motion.li)`
 	grid-template-columns: 1fr;
 	margin-bottom: 30px;
 	border-radius: 4px;
+	overflow: hidden;
 	background-color: ${(props) => props.theme['01dp']};
 `;
 const ContentWrapper = styled.div`

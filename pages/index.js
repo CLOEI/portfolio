@@ -35,7 +35,7 @@ const blogVariant = {
 	animate: {
 		x: 0,
 		transition: {
-			staggerChildren: 0.5,
+			staggerChildren: 0.3,
 			type: 'tween',
 		},
 	},
@@ -47,8 +47,9 @@ const blogVariant = {
 	},
 };
 
-function Home({ entries }) {
+function Home({ projects, posts }) {
 	const [currIsProject, setCurrIsProject] = useState(true);
+	console.log(posts);
 
 	return (
 		<Wrapper>
@@ -114,7 +115,7 @@ function Home({ entries }) {
 								exit="exit"
 								variants={projectVariant}
 							>
-								{entries.map((entry, i) => {
+								{projects.map((entry, i) => {
 									return <ProjectCard data={entry} key={i} />;
 								})}
 							</motion.ul>
@@ -126,8 +127,8 @@ function Home({ entries }) {
 								exit="exit"
 								variants={blogVariant}
 							>
-								{entries.map((entry, i) => {
-									return <ProjectCard data={entry} key={i} />;
+								{posts.map((entry, i) => {
+									return null;
 								})}
 							</motion.ul>
 						)}
@@ -141,13 +142,17 @@ function Home({ entries }) {
 export async function getStaticProps() {
 	const client = require('../contentful');
 
-	const entries = await client.getEntries({
+	const projects = await client.getEntries({
 		content_type: 'projects',
+	});
+	const posts = await client.getEntries({
+		content_type: 'post',
 	});
 
 	return {
 		props: {
-			entries: entries.items,
+			projects: projects.items,
+			posts: posts.items,
 		},
 	};
 }
