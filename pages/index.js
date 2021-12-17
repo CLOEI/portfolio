@@ -9,6 +9,7 @@ import Image from 'next/image';
 
 import profile from '../public/profile.jpg';
 import ProjectCard from '../components/ProjectCard';
+import PostCard from '../components/PostCard';
 
 const projectVariant = {
 	initial: {
@@ -128,7 +129,7 @@ function Home({ projects, posts }) {
 								variants={blogVariant}
 							>
 								{posts.map((entry, i) => {
-									return null;
+									return <PostCard key={i} data={entry} />;
 								})}
 							</motion.ul>
 						)}
