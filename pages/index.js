@@ -61,7 +61,13 @@ function Home({ projects, posts }) {
 				<Heading>Cendy</Heading>
 				<ProfileContainer>
 					<Profile>
-						<Image src={profile} placeholder="blur" alt="Cendy" layout="responsive" />
+						<Image
+							src={profile}
+							placeholder="blur"
+							alt="Cendy"
+							layout="responsive"
+							priority
+						/>
 					</Profile>
 					<SocialContainer>
 						<SocialItem>
