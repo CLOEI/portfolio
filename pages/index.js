@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiInstagram } from 'react-icons/fi';
@@ -48,9 +48,14 @@ const blogVariant = {
 	},
 };
 
-function Home({ projects, posts }) {
+function Home({ projects, posts, slugs }) {
 	const [currIsProject, setCurrIsProject] = useState(true);
-	console.log(posts);
+	const [height, setHeight] = useState(0);
+	const mainElem = useRef();
+
+	useEffect(() => {
+		setHeight(mainElem.current.offsetHeight);
+	}, []);
 
 	return (
 		<Wrapper>
@@ -61,13 +66,7 @@ function Home({ projects, posts }) {
 				<Heading>Cendy</Heading>
 				<ProfileContainer>
 					<Profile>
-						<Image
-							src={profile}
-							placeholder="blur"
-							alt="Cendy"
-							layout="responsive"
-							priority
-						/>
+						<Image src={profile} placeholder="blur" alt="Cendy" layout="responsive" />
 					</Profile>
 					<SocialContainer>
 						<SocialItem>
@@ -111,7 +110,11 @@ function Home({ projects, posts }) {
 				<div
 					css={css`
 						overflow-x: hidden;
+						@media only screen and (max-width: 768px) {
+							min-height: ${height}px;
+						}
 					`}
+					ref={mainElem}
 				>
 					<AnimatePresence exitBeforeEnter initial={false}>
 						{currIsProject ? (
@@ -240,7 +243,7 @@ const ContactButton = styled.div`
 	font-family: 'Inter', sans-serif;
 	font-weight: 700;
 	padding: 0 15px;
-	background-color: ${(props) => props.theme['02dp']};
+	background-color: ${(props) => props.theme['01dp']};
 	margin-top: 15px;
 	cursor: pointer;
 	user-select: none;

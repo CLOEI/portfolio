@@ -97,7 +97,7 @@ const Wrapper = styled(motion.li)`
 	margin-bottom: 30px;
 	border-radius: 4px;
 	overflow: hidden;
-	background-color: ${(props) => props.theme['01dp']};
+	background-color: ${(props) => props.theme['02dp']};
 `;
 const ContentWrapper = styled.div`
 	position: relative;
