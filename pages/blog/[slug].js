@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { FiArrowLeft } from 'react-icons/fi';
+import { css } from '@emotion/react';
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -13,6 +14,21 @@ const options = {
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <Text weight="400">{children}</Text>,
 		[BLOCKS.HEADING_2]: (node, children) => <Heading as="h2">{children}</Heading>,
+		[INLINES.HYPERLINK]: (node, children) => (
+			<Text
+				as="a"
+				weight="400"
+				href={node.data.uri}
+				target="_blank"
+				rel="noreferrer"
+				css={css`
+					color: inherit;
+					opacity: 60%;
+				`}
+			>
+				{children}
+			</Text>
+		),
 	},
 };
 

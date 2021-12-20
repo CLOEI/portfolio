@@ -88,8 +88,8 @@ function Home({ projects, posts, slugs }) {
 				<Text
 					css={css`
 						width: 90%;
-						@media only screen and(min-width: 768px) {
-							width: 75%;
+						@media only screen and (min-width: 768px) {
+							width: 65%;
 						}
 					`}
 				>
