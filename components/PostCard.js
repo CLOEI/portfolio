@@ -20,27 +20,32 @@ function PostCard({ data }) {
 
 	return (
 		<Wrapper variants={cardVariant}>
-			<Link href={`/blog/${slug}`}>
-				<a>
-					<Heading>{title}</Heading>
-					<DateText>
-						{new Date(date).toLocaleDateString('en-US', {
-							weekday: 'long',
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric',
-						})}
-					</DateText>
-				</a>
-			</Link>
+			<div>
+				<Link href={`/blog/${slug}`}>
+					<a>
+						<Heading>{title}</Heading>
+					</a>
+				</Link>
+				<DateText>
+					{new Date(date).toLocaleDateString('en-US', {
+						weekday: 'long',
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+					})}
+				</DateText>
+			</div>
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled(motion.li)`
 	position: relative;
-	text-align: right;
+	display: flex;
 	cursor: pointer;
+	justify-content: flex-end;
+	text-align: right;
+	margin-bottom: 15px;
 	&::before {
 		content: '';
 		position: absolute;
@@ -54,13 +59,20 @@ const Wrapper = styled(motion.li)`
 	a {
 		color: inherit;
 		text-decoration: none;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
 	}
 `;
 const Heading = styled.h3`
 	font-family: 'Inter', sans-serif;
 	font-weight: ${(props) => props.weight || 800};
 	opacity: 87%;
-	cursor: initial;
 `;
 const DateText = styled.p`
 	font-family: 'Fira Code', monospace;

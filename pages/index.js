@@ -85,7 +85,19 @@ function Home({ projects, posts, slugs }) {
 						</SocialItem>
 					</SocialContainer>
 				</ProfileContainer>
-				<Text>I&apos;m a MERN stack developer</Text>
+				<Text
+					css={css`
+						width: 90%;
+						@media only screen and(min-width: 768px) {
+							width: 75%;
+						}
+					`}
+				>
+					Hello, my name is Cendy and I&apos;m a self-taught developer. My interest
+					in web development started when i decided to build and host a blog using
+					wordpress many years ago — and here i am at the present working with{' '}
+					<Mono>JavaScript</Mono>, <Mono>HTML</Mono> and <Mono>CSS</Mono> :)
+				</Text>
 				<ContactButton>
 					<a href="mailto:cendyemail@gmail.com">
 						<Text>Contact me</Text>
@@ -186,6 +198,12 @@ const Heading = styled.h1`
 const Text = styled.p`
 	font-family: 'Inter', sans-serif;
 	font-weight: 400;
+	line-height: 24px;
+`;
+const Mono = styled.span`
+	font-family: 'Fira Code', monospace;
+	font-weight: 300;
+	opacity: 60%;
 `;
 const ProfileWrapper = styled.div`
 	display: flex;

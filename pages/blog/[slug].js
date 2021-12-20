@@ -19,7 +19,7 @@ const options = {
 function Blog({ post }) {
 	const body = post[0].fields.body;
 	const title = post[0].fields.title;
-	const hero = post[0].fields.image?.fields?.file?.url || null;
+	const hero = post[0].fields.thumbnail?.fields?.file?.url || null;
 
 	const router = useRouter();
 
@@ -31,7 +31,7 @@ function Blog({ post }) {
 			<BackButton onClick={() => router.back()} />
 			{hero && (
 				<ImageWrapper>
-					<Image src={hero} layput="fill" alt={title} objectFit="cover" />
+					<Image src={`https:${hero}`} layout="fill" alt={title} objectFit="cover" />
 				</ImageWrapper>
 			)}
 			<Heading as="h1">{title}</Heading>
