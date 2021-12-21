@@ -5,8 +5,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { FiArrowLeft } from 'react-icons/fi';
 import { css } from '@emotion/react';
+import { NextSeo } from 'next-seo';
 
-import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -41,9 +41,14 @@ function Blog({ post }) {
 
 	return (
 		<Wrapper>
-			<Head>
-				<title>Cendy • {title}</title>
-			</Head>
+			<NextSeo
+				title={title}
+				openGraph={{
+					type: 'article',
+					locale: 'id_ID',
+					title: { title },
+				}}
+			/>
 			<BackButton onClick={() => router.back()} />
 			{hero && (
 				<ImageWrapper>

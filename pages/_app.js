@@ -1,4 +1,5 @@
 import { Global, css, ThemeProvider } from '@emotion/react';
+import { DefaultSeo } from 'next-seo';
 
 import '@fontsource/fira-code/300.css';
 import '@fontsource/inter/400.css';
@@ -35,6 +36,30 @@ const theme = {
 function MyApp({ Component, pageProps }) {
 	return (
 		<ThemeProvider theme={theme}>
+			<DefaultSeo
+				defaultTitle="Cendy"
+				titleTemplate="Cendy • %s"
+				description="Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many years ago — and here i am at the present working with JavaScript, HTML and CSS :)"
+				openGraph={{
+					type: 'website',
+					locale: 'en_US',
+					url: 'https://cendy.co',
+					site_name: 'Cendy',
+					description:
+						"Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many years ago — and here i am at the present working with JavaScript, HTML and CSS :)",
+					images: [
+						{
+							url: 'https://cendy.co/profile.jpg',
+							width: 460,
+							height: 460,
+							alt: 'Cendy',
+						},
+					],
+				}}
+				twitter={{
+					cardType: 'summary',
+				}}
+			/>
 			{globalStyle}
 			<Component {...pageProps} />
 		</ThemeProvider>

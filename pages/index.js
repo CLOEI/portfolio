@@ -59,9 +59,6 @@ function Home({ projects, posts, slugs }) {
 
 	return (
 		<Wrapper>
-			<Head>
-				<title>Cendy</title>
-			</Head>
 			<ProfileWrapper>
 				<Heading>Cendy</Heading>
 				<ProfileContainer>
