@@ -129,9 +129,10 @@ function Home({ projects, posts, slugs }) {
 								animate="animate"
 								exit="exit"
 								variants={projectVariant}
-								onPan={(event, info) => {
-									console.log(info.offset.x);
-									if (info.offset.x < -5) {
+								drag="x"
+								dragConstraints={{ right: 0, left: 0 }}
+								onDragEnd={(event, info) => {
+									if (info.offset.x < -100 && info.velocity.x < -500) {
 										setCurrIsProject(false);
 									}
 								}}
@@ -148,12 +149,14 @@ function Home({ projects, posts, slugs }) {
 								animate="animate"
 								exit="exit"
 								variants={blogVariant}
-								onPan={(event, info) => {
-									if (info.offset.x > 5) {
+								style={{ minHeight: height }}
+								drag="x"
+								dragConstraints={{ right: 0, left: 0 }}
+								onDragEnd={(event, info) => {
+									if (info.offset.x > 100 && info.velocity.x > 500) {
 										setCurrIsProject(true);
 									}
 								}}
-								style={{ minHeight: height }}
 							>
 								{posts.map((entry, i) => {
 									return <PostCard key={i} data={entry} />;
