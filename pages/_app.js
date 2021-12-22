@@ -39,25 +39,22 @@ function MyApp({ Component, pageProps }) {
 			<DefaultSeo
 				defaultTitle="Cendy"
 				titleTemplate="Cendy • %s"
-				description="Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many years ago — and here i am at the present working with JavaScript, HTML and CSS :)"
+				description="Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many..."
 				openGraph={{
 					type: 'website',
 					locale: 'en_US',
 					url: 'https://cendy.co',
 					site_name: 'Cendy',
 					description:
-						"Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many years ago — and here i am at the present working with JavaScript, HTML and CSS :)",
+						"Hello, my name is Cendy and I'm a self-taught developer. My interest in web development started when i decided to build and host a blog using wordpress many...",
 					images: [
 						{
-							url: 'https://cendy.co/profile.jpg',
+							url: '/profile.jpg',
 							width: 460,
 							height: 460,
 							alt: 'Cendy',
 						},
 					],
-				}}
-				twitter={{
-					cardType: 'summary',
 				}}
 			/>
 			{globalStyle}

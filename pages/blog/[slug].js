@@ -32,7 +32,7 @@ const options = {
 	},
 };
 
-function Blog({ post }) {
+function Blog({ post, SEODesc }) {
 	const body = post[0].fields.body;
 	const title = post[0].fields.title;
 	const hero = post[0].fields.thumbnail?.fields?.file?.url || null;
@@ -43,10 +43,12 @@ function Blog({ post }) {
 		<Wrapper>
 			<NextSeo
 				title={title}
+				description={SEODesc}
 				openGraph={{
 					type: 'article',
 					locale: 'id_ID',
-					title: { title },
+					title: title,
+					description: SEODesc,
 				}}
 			/>
 			<BackButton onClick={() => router.back()} />
@@ -83,9 +85,19 @@ export async function getStaticProps({ params }) {
 		content_type: 'post',
 		'fields.slug': params.slug,
 	});
+	const SEODesc = post.items[0].fields.body.content
+		.filter((item) => item.nodeType === 'paragraph')
+		.slice(0, 1)
+		.map((item) => item.content)[0]
+		.filter((item) => item.nodeType === 'text')
+		.map((item) => item.value)
+		.join('')
+		.slice(0, 160);
+
 	return {
 		props: {
 			post: post.items,
+			SEODesc,
 		},
 	};
 }
