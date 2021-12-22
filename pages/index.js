@@ -133,6 +133,11 @@ function Home({ projects, posts, slugs }) {
 								animate="animate"
 								exit="exit"
 								variants={projectVariant}
+								onPan={(event, info) => {
+									if (info.offset.x < 0) {
+										setCurrIsProject(false);
+									}
+								}}
 							>
 								{projects.map((entry, i) => {
 									return <ProjectCard data={entry} key={i} />;
@@ -145,6 +150,12 @@ function Home({ projects, posts, slugs }) {
 								animate="animate"
 								exit="exit"
 								variants={blogVariant}
+								onPan={(event, info) => {
+									if (info.offset.x > 0) {
+										setCurrIsProject(true);
+									}
+								}}
+								style={{ minHeight: height }}
 							>
 								{posts.map((entry, i) => {
 									return <PostCard key={i} data={entry} />;
