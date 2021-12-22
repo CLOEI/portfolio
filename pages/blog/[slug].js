@@ -57,7 +57,14 @@ function Blog({ post, SEODesc }) {
 					<Image src={`https:${hero}`} layout="fill" alt={title} objectFit="cover" />
 				</ImageWrapper>
 			)}
-			<Heading as="h1">{title}</Heading>
+			<Heading
+				as="h1"
+				css={css`
+					line-height: 32px;
+				`}
+			>
+				{title}
+			</Heading>
 			{documentToReactComponents(body, options)}
 		</Wrapper>
 	);

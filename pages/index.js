@@ -119,11 +119,7 @@ function Home({ projects, posts, slugs }) {
 				<div
 					css={css`
 						overflow-x: hidden;
-						@media only screen and (max-width: 768px) {
-							min-height: ${height}px;
-						}
 					`}
-					ref={mainElem}
 				>
 					<AnimatePresence exitBeforeEnter initial={false}>
 						{currIsProject ? (
@@ -134,10 +130,12 @@ function Home({ projects, posts, slugs }) {
 								exit="exit"
 								variants={projectVariant}
 								onPan={(event, info) => {
-									if (info.offset.x < 0) {
+									console.log(info.offset.x);
+									if (info.offset.x < -5) {
 										setCurrIsProject(false);
 									}
 								}}
+								ref={mainElem}
 							>
 								{projects.map((entry, i) => {
 									return <ProjectCard data={entry} key={i} />;
@@ -151,7 +149,7 @@ function Home({ projects, posts, slugs }) {
 								exit="exit"
 								variants={blogVariant}
 								onPan={(event, info) => {
-									if (info.offset.x > 0) {
+									if (info.offset.x > 5) {
 										setCurrIsProject(true);
 									}
 								}}
