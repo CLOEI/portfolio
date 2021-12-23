@@ -51,7 +51,7 @@ function Blog({ post, SEODesc }) {
 					description: SEODesc,
 				}}
 			/>
-			<BackButton onClick={() => router.back()} />
+			<BackButton onClick={() => router.replace('/')} />
 			{hero && (
 				<ImageWrapper>
 					<Image src={`https:${hero}`} layout="fill" alt={title} objectFit="cover" />
