@@ -1,8 +1,6 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
-
 import Link from 'next/link';
+
+import { motion } from 'framer-motion';
 
 const cardVariant = {
 	initial: {
@@ -19,68 +17,25 @@ function PostCard({ data }) {
 	const slug = data.fields.slug;
 
 	return (
-		<Wrapper variants={cardVariant}>
-			<div>
-				<Link href={`/blog/${slug}`}>
-					<a>
-						<Heading>{title}</Heading>
-					</a>
-				</Link>
-				<DateText>
-					{new Date(date).toLocaleDateString('en-US', {
-						weekday: 'long',
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-					})}
-				</DateText>
-			</div>
-		</Wrapper>
+		<motion.div
+			className="relative border-dark-02dp border-2 rounded-lg my-2 p-2"
+			variants={cardVariant}
+		>
+			<Link href={`/blog/${slug}`}>
+				<a className="after:absolute after:top-0 after:left-0 after:w-full after:h-full">
+					<h3 className="text-high text-lg font-bold">{title}</h3>
+				</a>
+			</Link>
+			<p className="text-medium w-max">
+				{new Date(date).toLocaleDateString('id-ID', {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				})}
+			</p>
+		</motion.div>
 	);
 }
-
-const Wrapper = styled(motion.li)`
-	position: relative;
-	display: flex;
-	cursor: pointer;
-	justify-content: flex-end;
-	text-align: right;
-	margin-bottom: 15px;
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 3px;
-		height: 100%;
-		background-color: #fff;
-		opacity: 87%;
-	}
-	a {
-		color: inherit;
-		text-decoration: none;
-		&::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-	}
-`;
-const Heading = styled.h3`
-	font-family: 'Inter', sans-serif;
-	font-weight: ${(props) => props.weight || 800};
-	opacity: 87%;
-`;
-const DateText = styled.p`
-	font-family: 'Fira Code', monospace;
-	font-weight: 300;
-	font-size: 0.8rem;
-	padding: 0;
-	opacity: 60%;
-	cursor: initial;
-`;
 
 export default PostCard;

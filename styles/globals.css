@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.text-high {
+		@apply dark:text-white opacity-[87%] text-black;
+	}
+	.text-medium {
+		@apply dark:text-white opacity-[60%] text-black;
+	}
+}
+
+body {
+	@apply dark:bg-dark-00dp;
+}

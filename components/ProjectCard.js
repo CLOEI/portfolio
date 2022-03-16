@@ -1,12 +1,9 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { css } from '@emotion/react';
-import { motion } from 'framer-motion';
-
 import Image from 'next/image';
 
-const cardVariant = {
+import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+
+const cardVariants = {
 	initial: {
 		opacity: 0,
 	},
@@ -16,138 +13,69 @@ const cardVariant = {
 };
 
 function ProjectCard({ data }) {
-	const title = data.fields.title;
-	const description = data.fields.description;
-	const tags = data.fields.tags;
-	const image = data.fields.image.fields.file.url;
-	const repoLink = data.fields.repositoryLink;
-	const liveLink = data.fields.liveViewLink;
+	const { fields } = data;
+	const title = fields.title;
+	const description = fields.description;
+	const tags = fields.tags;
+	const image = fields.image.fields.file.url;
+	const repoLink = fields.repositoryLink;
+	const liveLink = fields.liveViewLink;
 
 	return (
-		<Wrapper variants={cardVariant}>
-			<ContentWrapper>
+		<motion.li
+			className="relative mb-5 overflow-hidden bg-dark-02dp"
+			variants={cardVariants}
+		>
+			<div className="relative pt-6 px-6 pb-5 z-10">
 				<a
 					href={liveLink}
 					target="_blank"
 					rel="noreferrer"
-					css={css`
-						text-decoration: none;
-						color: inherit;
-						&::before {
-							content: '';
-							position: absolute;
-							top: 0;
-							right: 0;
-							left: 0;
-							bottom: 0;
-							z-index: -1;
-						}
-					`}
+					className="before:absolute before:top-0 before:left-0 before:w-full before:h-full"
 				>
-					<Text as="h3">{title}</Text>
+					<h3 className="text-white text-high font-bold">{title}</h3>
 				</a>
-				<Text weight="400" as="p">
-					{description}
-				</Text>
-				<TechList>
+				<p className="text-white text-medium my-1">{description}</p>
+				<ul className="flex flex-wrap my-6 w-max">
 					{tags.map((tag, i) => {
-						return <Tag key={i}>{tag}</Tag>;
+						return (
+							<li key={i} className="mr-3 mb-2 text-white text-medium text-xs">
+								{tag}
+							</li>
+						);
 					})}
-				</TechList>
-				<ExternalContainer>
-					<Link href={repoLink} target="_blank" rel="noreferrer">
+				</ul>
+				<div className="flex items-center -ml-2 z-10 w-max text-high text-white">
+					<a
+						className="p-3 hover:bg-dark-onhover hover:rounded-full"
+						href={repoLink}
+						target="_blank"
+						rel="noreferrer"
+					>
 						<FiGithub />
-					</Link>
-					<Link href={liveLink} target="_blank" rel="noreferrer">
+					</a>
+					<a
+						className="p-3 hover:bg-dark-onhover hover:rounded-full"
+						href={liveLink}
+						target="_blank"
+						rel="noreferrer"
+					>
 						<FiExternalLink />
-					</Link>
-				</ExternalContainer>
-			</ContentWrapper>
-			<ImageWrapper>
-				<Image
-					src={`https:${image}`}
-					alt={title}
-					objectFit="cover"
-					layout="fill"
-					priority
-				/>
-			</ImageWrapper>
-		</Wrapper>
+					</a>
+				</div>
+			</div>
+			<div className="absolute top-0 left-0 w-full h-full">
+				<div className="relative w-full h-full mix-blend-multiply">
+					<Image
+						src={`https:${image}`}
+						alt={title}
+						objectFit="cover"
+						layout="fill"
+					/>
+				</div>
+			</div>
+		</motion.li>
 	);
 }
-
-const Text = styled.h1`
-	font-family: 'Inter', sans-serif;
-	font-weight: ${(props) => props.weight || 800};
-	opacity: 87%;
-	line-height: 24px;
-`;
-const Tag = styled.li`
-	font-family: 'Fira Code', monospace;
-	font-weight: 300;
-	font-size: 0.8rem;
-	padding: 0;
-	margin: 0px 10px 5px 0px;
-	opacity: 60%;
-`;
-const Wrapper = styled(motion.li)`
-	position: relative;
-	display: grid;
-	grid-template-columns: 1fr;
-	margin-bottom: 30px;
-	border-radius: 4px;
-	overflow: hidden;
-	background-color: ${(props) => props.theme['02dp']};
-`;
-const ContentWrapper = styled.div`
-	position: relative;
-	padding: 25px 25px 20px;
-	grid-area: 1/1/1/-1;
-	z-index: 2;
-`;
-const ImageWrapper = styled.div`
-	position: relative;
-	z-index: 1;
-	grid-area: 1/1/1/-1;
-	user-select: none;
-	mix-blend-mode: multiply;
-	span {
-		opacity: 0.65 !important;
-	}
-	&::before {
-		position: absolute;
-		content: '';
-		width: 100%;
-		height: 100%;
-		background-color: ${(props) => props.theme['02dp']};
-	}
-`;
-const TechList = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-	list-style-type: none;
-	margin: 30px 0;
-	padding: 0;
-	width: max-content;
-`;
-const ExternalContainer = styled.div`
-	display: flex;
-	align-items: center;
-	margin-left: -10px;
-	z-index: 3;
-	width: max-content;
-`;
-const Link = styled.a`
-	text-decoration: none;
-	color: inherit;
-	padding: 10px;
-	svg {
-		width: 20px;
-		height: 20px;
-	}
-	&:hover {
-		opacity: 60%;
-	}
-`;
 
 export default ProjectCard;

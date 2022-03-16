@@ -1,15 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from '@emotion/styled';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiInstagram } from 'react-icons/fi';
-import { css } from '@emotion/react';
-
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import profile from '../public/profile.jpg';
+import { FiGithub, FiInstagram, FiMoon, FiSun } from 'react-icons/fi';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
+
 import ProjectCard from '../components/ProjectCard';
 import PostCard from '../components/PostCard';
+
+import profile from '../public/profile.jpeg';
 
 const projectVariant = {
 	initial: {
@@ -48,125 +49,148 @@ const blogVariant = {
 	},
 };
 
-function Home({ projects, posts, slugs }) {
+export default function Home({ projects, posts }) {
+	const { theme, setTheme } = useTheme();
 	const [currIsProject, setCurrIsProject] = useState(true);
 	const [height, setHeight] = useState(0);
-	const mainElem = useRef();
+	const mainRef = useRef(null);
 
 	useEffect(() => {
-		setHeight(mainElem.current.offsetHeight);
+		setHeight(mainRef.current.offsetHeight);
 	}, []);
 
 	return (
-		<Wrapper>
-			<ProfileWrapper>
-				<Heading>Cendy</Heading>
-				<ProfileContainer>
-					<Profile>
+		<div className="grid grid-rows-1 gap-5 mt-2 mx-4 md:grid-cols-2">
+			<Head>
+				<title>Cendy</title>
+			</Head>
+			<div className="flex flex-col items-center md:items-start md:sticky md:top-5 md:self-start">
+				<h1 className="text-high font-bold text-3xl my-4">Cendy</h1>
+				<div className="flex w-full flex-col items-center md:flex-row md:items-end">
+					<div className="overflow-hidden rounded-full mb-3 w-full max-w-[12rem]">
 						<Image src={profile} placeholder="blur" alt="Cendy" layout="responsive" />
-					</Profile>
-					<SocialContainer>
-						<SocialItem>
-							<a href="https://github.com/CLOEI" target="_blank" rel="noreferrer">
+					</div>
+					<ul className="grid w-max grid-cols-3 gap-1 my-4">
+						<li className="bg-dark-01dp rounded-full cursor-pointer select-none hover:bg-dark-onhover">
+							<a
+								className="grid items-center justify-center text-white w-9 h-9"
+								href="https://github.com/CLOEI"
+								target="_blank"
+								rel="noreferrer"
+							>
 								<FiGithub />
 							</a>
-						</SocialItem>
-						<SocialItem>
+						</li>
+						<li className="bg-dark-01dp rounded-full cursor-pointer select-none hover:bg-dark-onhover">
 							<a
+								className="grid items-center justify-center text-white w-9 h-9"
 								href="https://www.instagram.com/cendy_ig/"
 								target="_blank"
 								rel="noreferrer"
 							>
 								<FiInstagram />
 							</a>
-						</SocialItem>
-					</SocialContainer>
-				</ProfileContainer>
-				<Text
-					css={css`
-						width: 90%;
-						@media only screen and (min-width: 768px) {
-							width: 65%;
-						}
-					`}
-				>
+						</li>
+						<li className="bg-dark-01dp rounded-full cursor-pointer select-none hover:bg-dark-onhover">
+							<button
+								className="grid items-center justify-center text-white w-9 h-9"
+								onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+							>
+								{theme === 'dark' ? <FiSun /> : <FiMoon />}
+							</button>
+						</li>
+					</ul>
+				</div>
+				<p className="text-high text-justify leading-6 w-[90%] md:w-[65%] my-2">
 					Hello, my name is Cendy and I&apos;m a self-taught developer. My interest
 					in web development started when i decided to build and host a blog using
 					wordpress many years ago — and here i am at the present working with{' '}
-					<Mono>JavaScript</Mono>, <Mono>HTML</Mono> and <Mono>CSS</Mono> :)
-				</Text>
-				<ContactButton>
+					<span className="text-medium">JavaScript</span>,{' '}
+					<span className="text-medium">HTML</span> and{' '}
+					<span className="text-medium">CSS</span> :)
+				</p>
+				<button className="bg-dark-01dp p-3 my-4">
 					<a href="mailto:cendyemail@gmail.com">
-						<Text>Contact me</Text>
+						<p className="text-white text-high">Contact me</p>
 					</a>
-				</ContactButton>
-			</ProfileWrapper>
-			<MainWrapper>
-				<Navigation as={motion.ul} layout>
-					<NavigationItem onClick={() => setCurrIsProject(true)}>
-						<Heading weight={700} as="h2">
-							Projects
-						</Heading>
-						{currIsProject && <Underline layoutId="underline" />}
-					</NavigationItem>
-					<NavigationItem onClick={() => setCurrIsProject(false)}>
-						<Heading weight={700} as="h2">
-							Blog
-						</Heading>
-						{!currIsProject && <Underline layoutId="underline" />}
-					</NavigationItem>
-				</Navigation>
-				<div
-					css={css`
-						overflow-x: hidden;
-					`}
-				>
-					<AnimatePresence exitBeforeEnter initial={false}>
-						{currIsProject ? (
-							<motion.ul
-								key="project"
-								initial="initial"
-								animate="animate"
-								exit="exit"
-								variants={projectVariant}
-								drag="x"
-								dragConstraints={{ right: 0, left: 0 }}
-								onDragEnd={(event, info) => {
-									if (info.offset.x < -100 && info.velocity.x < -500) {
-										setCurrIsProject(false);
-									}
-								}}
-								ref={mainElem}
-							>
-								{projects.map((entry, i) => {
-									return <ProjectCard data={entry} key={i} />;
-								})}
-							</motion.ul>
-						) : (
-							<motion.ul
-								key="blog"
-								initial="initial"
-								animate="animate"
-								exit="exit"
-								variants={blogVariant}
-								style={{ minHeight: height }}
-								drag="x"
-								dragConstraints={{ right: 0, left: 0 }}
-								onDragEnd={(event, info) => {
-									if (info.offset.x > 100 && info.velocity.x > 500) {
-										setCurrIsProject(true);
-									}
-								}}
-							>
-								{posts.map((entry, i) => {
-									return <PostCard key={i} data={entry} />;
-								})}
-							</motion.ul>
-						)}
-					</AnimatePresence>
-				</div>
-			</MainWrapper>
-		</Wrapper>
+				</button>
+			</div>
+			<main>
+				<nav>
+					<motion.ul className="flex relative items-center my-4 after:w-full after:h-[1px] after:bg-dark-02dp">
+						<li
+							className="relative p-4 cursor-pointer select-none"
+							onClick={() => setCurrIsProject(true)}
+						>
+							<h2 className="text-high text-xl font-bold">Projects</h2>
+							{currIsProject && (
+								<motion.div
+									className="absolute w-full h-1 left-0 bottom-[-1px] bg-dark-02dp"
+									layoutId="underline"
+								/>
+							)}
+						</li>
+						<li
+							className="relative p-4 cursor-pointer select-none"
+							onClick={() => setCurrIsProject(false)}
+						>
+							<h2 className="text-high text-xl font-bold">Blog</h2>
+							{!currIsProject && (
+								<motion.div
+									className="absolute w-full h-1 left-0 bottom-[-1px] bg-dark-02dp"
+									layoutId="underline"
+								/>
+							)}
+						</li>
+					</motion.ul>
+					<div className="overflow-x-hidden">
+						<AnimatePresence exitBeforeEnter initial={false}>
+							{currIsProject ? (
+								<motion.ul
+									key="project"
+									initial="initial"
+									animate="animate"
+									exit="exit"
+									variants={projectVariant}
+									drag="x"
+									dragConstraints={{ right: 0, left: 0 }}
+									onDragEnd={(_, info) => {
+										if (info.offset.x < -100 && info.velocity.x < -500) {
+											setCurrIsProject(false);
+										}
+									}}
+									ref={mainRef}
+								>
+									{projects.map((entry, i) => {
+										return <ProjectCard data={entry} key={i} />;
+									})}
+								</motion.ul>
+							) : (
+								<motion.ul
+									key="blog"
+									initial="initial"
+									animate="animate"
+									exit="exit"
+									variants={blogVariant}
+									style={{ minHeight: height }}
+									drag="x"
+									dragConstraints={{ right: 0, left: 0 }}
+									onDragEnd={(_, info) => {
+										if (info.offset.x > 100 && info.velocity.x > 500) {
+											setCurrIsProject(true);
+										}
+									}}
+								>
+									{posts.map((entry, i) => {
+										return <PostCard key={i} data={entry} />;
+									})}
+								</motion.ul>
+							)}
+						</AnimatePresence>
+					</div>
+				</nav>
+			</main>
+		</div>
 	);
 }
 
@@ -187,130 +211,3 @@ export async function getStaticProps() {
 		},
 	};
 }
-
-const Wrapper = styled.div`
-	display: grid;
-	grid-template-rows: 1fr;
-	grid-gap: 20px;
-	margin: 10px 10px 0 10px;
-	@media (min-width: 768px) {
-		grid-template-columns: 1fr 1fr;
-		grid-gap: 50px;
-		margin: 20px 20px 0 20px;
-	}
-`;
-const Heading = styled.h1`
-	font-family: 'Inter', sans-serif;
-	font-weight: ${(props) => props.weight || 800};
-	opacity: 87%;
-`;
-const Text = styled.p`
-	font-family: 'Inter', sans-serif;
-	font-weight: 400;
-	line-height: 24px;
-`;
-const Mono = styled.span`
-	font-family: 'Fira Code', monospace;
-	font-weight: 300;
-	opacity: 60%;
-`;
-const ProfileWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	@media (min-width: 768px) {
-		align-items: flex-start;
-		position: sticky;
-		top: 20px;
-		align-self: start;
-	}
-`;
-const ProfileContainer = styled.div`
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	@media (min-width: 768px) {
-		flex-direction: row;
-		align-items: flex-end;
-	}
-`;
-const Profile = styled.div`
-	width: 100%;
-	border-radius: 50%;
-	overflow: hidden;
-	max-width: 180px;
-	margin-bottom: 15px;
-`;
-const SocialContainer = styled.ul`
-	width: max-content;
-	padding: 0;
-	list-style-type: none;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 5px;
-`;
-const SocialItem = styled.li`
-	background-color: ${(props) => props.theme['01dp']};
-	border-radius: 50%;
-	cursor: pointer;
-	user-select: none;
-	a {
-		display: grid;
-		place-items: center;
-		color: inherit;
-		width: 35px;
-		height: 35px;
-	}
-	&:hover {
-		background-color: ${(props) => props.theme['02dp']};
-	}
-`;
-const ContactButton = styled.div`
-	font-family: 'Inter', sans-serif;
-	font-weight: 700;
-	padding: 0 15px;
-	background-color: ${(props) => props.theme['01dp']};
-	margin-top: 15px;
-	cursor: pointer;
-	user-select: none;
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-`;
-const MainWrapper = styled.div`
-	ul {
-		position: relative;
-		list-style-type: none;
-		padding: 0;
-	}
-`;
-const Navigation = styled.ul`
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-	margin: 0;
-	&::after {
-		content: '';
-		width: 100%;
-		height: 1px;
-		background-color: ${(props) => props.theme['02dp']};
-	}
-`;
-const NavigationItem = styled.li`
-	position: relative;
-	padding: 0 15px;
-	cursor: pointer;
-	user-select: none;
-`;
-
-const Underline = styled(motion.div)`
-	position: absolute;
-	width: 100%;
-	height: 2px;
-	left: 0;
-	background-color: ${(props) => props.theme['03dp']};
-`;
-
-export default Home;
