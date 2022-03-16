@@ -23,7 +23,7 @@ function ProjectCard({ data }) {
 
 	return (
 		<motion.li
-			className="relative mb-5 overflow-hidden bg-dark-02dp"
+			className="relative mb-5 overflow-hidden bg-dark-01dp"
 			variants={cardVariants}
 		>
 			<div className="relative pt-6 px-6 pb-5 z-10">

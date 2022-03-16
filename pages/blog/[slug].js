@@ -9,10 +9,11 @@ import { FiArrowLeft } from 'react-icons/fi';
 const renderOptions = {
 	renderNode: {
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
+			console.log(node.data.target.fields.file.url);
 			return (
 				<div className="w-max mx-auto my-4">
 					<Image
-						src={`https://${node.data.target.fields.file.url}`}
+						src={`https:${node.data.target.fields.file.url}`}
 						height={node.data.target.fields.file.details.image.height}
 						width={node.data.target.fields.file.details.image.width}
 						alt={node.data.target.fields.description}
