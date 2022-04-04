@@ -9,9 +9,8 @@ import { FiArrowLeft } from 'react-icons/fi';
 const renderOptions = {
 	renderNode: {
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
-			console.log(node.data.target.fields.file.url);
 			return (
-				<div className="w-max mx-auto my-4">
+				<div className="relative flex justify-center w-full my-4">
 					<Image
 						src={`https:${node.data.target.fields.file.url}`}
 						height={node.data.target.fields.file.details.image.height}
@@ -26,6 +25,9 @@ const renderOptions = {
 		),
 		[BLOCKS.HEADING_2]: (node, children) => (
 			<h2 className="text-high font-bold text-3xl my-2">{children}</h2>
+		),
+		[BLOCKS.HEADING_3]: (node, children) => (
+			<h3 className="text-high font-bold text-2xl my-2">{children}</h3>
 		),
 		[INLINES.HYPERLINK]: (node, children) => (
 			<a
