@@ -2,15 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-	.text-high {
-		@apply dark:text-white opacity-[87%] text-black;
-	}
-	.text-medium {
-		@apply dark:text-white opacity-[60%] text-black;
+@layer base {
+	body {
+		@apply bg-eerie-black text-snow;
 	}
 }
 
-body {
-	@apply dark:bg-dark-00dp;
+@layer components {
+	.icon-button {
+		@apply flex justify-center items-center bg-snow w-10 h-10 text-black rounded-lg hover:bg-white hover:opacity-90;
+	}
+	.tab-button {
+		@apply relative px-4 py-2 font-bold;
+	}
+	.tab-underline {
+		@apply absolute -bottom-1 left-0 w-full h-1 bg-blue-green;
+	}
 }

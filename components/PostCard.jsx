@@ -18,7 +18,7 @@ function PostCard({ data }) {
 
 	return (
 		<motion.div
-			className="relative border-dark-02dp border-2 rounded-lg my-2 p-2"
+			className="relative border-blue-green border-2 rounded-lg p-2"
 			variants={cardVariant}
 		>
 			<Link href={`/blog/${slug}`}>
