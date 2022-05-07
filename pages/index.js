@@ -1,7 +1,8 @@
 import Head from 'next/head';
 
+import Projects from '../components/projects';
 import Profile from '../components/Profile';
-import Main from '../components/Main';
+import Blog from '../components/blog';
 
 function Home({ projects, posts }) {
 	return (
@@ -10,7 +11,10 @@ function Home({ projects, posts }) {
 				<title>Cendy</title>
 			</Head>
 			<Profile />
-			<Main projects={projects} posts={posts} />
+			<div className="py-10 px-2 md:px-16 lg:px-28">
+				<Projects projects={projects} />
+				<Blog posts={posts} />
+			</div>
 		</div>
 	);
 }

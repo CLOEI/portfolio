@@ -1,42 +1,9 @@
-import Image from 'next/image';
-
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
-import { staggerVariant } from '../utils/variants';
+import Image from 'next/image';
 
-const cardVariants = {
-	initial: {
-		x: '-150%',
-	},
-	animate: {
-		x: 0,
-	},
-};
-const buttonVariant = {
-	initial: {
-		y: '-150%',
-	},
-	animate: {
-		y: 0,
-		transition: {
-			x: { type: 'spring', stiffness: 100 },
-			default: {
-				duration: 0.3,
-			},
-		},
-	},
-};
-const imgContainerVariant = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: 0.75,
-	},
-};
-
-function ProjectCard({ data }) {
+function Card({ data }) {
 	const { fields } = data;
 	const title = fields.title;
 	const description = fields.description;
@@ -90,4 +57,4 @@ function ProjectCard({ data }) {
 	);
 }
 
-export default ProjectCard;
+export default Card;
