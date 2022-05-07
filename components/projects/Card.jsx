@@ -1,9 +1,17 @@
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 
 import Image from 'next/image';
 
 function Card({ data }) {
+	const animation = useAnimation();
+	const { ref, inView } = useInView({
+		threshold: 0.5,
+		triggerOnce: true,
+	});
+
 	const { fields } = data;
 	const title = fields.title;
 	const description = fields.description;
@@ -12,8 +20,20 @@ function Card({ data }) {
 	const repoLink = fields.repositoryLink;
 	const liveLink = fields.liveViewLink;
 
+	useEffect(() => {
+		if (inView) {
+			animation.start('animate');
+		}
+	}, [inView, animation]);
+
 	return (
-		<motion.div className="grid grid-cols-12 grid-rows-6 w-full md:w-full odd:from-left even:from-right">
+		<motion.div
+			variants={thisVariant}
+			initial="initial"
+			animate={animation}
+			className="grid grid-cols-12 grid-rows-6 w-full md:w-full odd:from-left even:from-right"
+			ref={ref}
+		>
 			<div className="img-container relative col-[1/-1] row-[1/-1] md:rounded-lg overflow-hidden mix-blend-overlay md:mix-blend-normal md:opacity-40 hover:opacity-90">
 				<Image
 					src={'https:' + image}
@@ -56,5 +76,14 @@ function Card({ data }) {
 		</motion.div>
 	);
 }
+
+const thisVariant = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+	},
+};
 
 export default Card;

@@ -1,8 +1,22 @@
-import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 
 import Card from './Card';
 
 function Index({ posts }) {
+	const animation = useAnimation();
+	const { ref, inView } = useInView({
+		threshold: 0.2,
+		triggerOnce: true,
+	});
+
+	useEffect(() => {
+		if (inView) {
+			animation.start('animate');
+		}
+	}, [inView, animation]);
+
 	return (
 		<div>
 			<h2 className="relative font-bold text-3xl md:text-5xl opacity-[38%] pb-4">
@@ -13,8 +27,9 @@ function Index({ posts }) {
 			<motion.div
 				variants={thisVariant}
 				initial="initial"
-				animate="animate"
-				className="grid grid-cols-2 md:grid-cols-4 gap-1"
+				animate={animation}
+				className="grid grid-cols-2 md:grid-cols-4 gap-px"
+				ref={ref}
 			>
 				{posts.map((post, i) => {
 					return <Card key={i} data={post} />;
@@ -27,7 +42,7 @@ function Index({ posts }) {
 const thisVariant = {
 	animate: {
 		transition: {
-			staggerChildren: 0.2,
+			staggerChildren: 0.5,
 		},
 	},
 };
