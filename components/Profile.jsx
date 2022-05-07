@@ -48,7 +48,7 @@ const buttonVariant = {
 
 function Profile() {
 	return (
-		<>
+		<div className="h-screen">
 			<div className="flex flex-col md:flex-row px-4 h-full items-center justify-center md:justify-around">
 				<div className="order-2 md:order-none">
 					<p className="opacity-60">Hello my name</p>
@@ -92,7 +92,13 @@ function Profile() {
 				</div>
 				<div className="relative mb-8 overflow-hidden">
 					<div className="relative w-60 h-60 mb-10 rounded-full overflow-hidden flex-shrink-0 order-1 md:order-none">
-						<Image src={ProfileImage} alt="cendy" layout="fill" placeholder="blur" />
+						<Image
+							src={ProfileImage}
+							alt="cendy"
+							layout="fill"
+							placeholder="blur"
+							priority
+						/>
 					</div>
 					<motion.div
 						variants={rightVariants}
@@ -125,7 +131,7 @@ function Profile() {
 			<div className="absolute bottom-2 left-0 right-0 animate-bounce ">
 				<BsCaretDownFill className="mx-auto" />
 			</div>
-		</>
+		</div>
 	);
 }
 

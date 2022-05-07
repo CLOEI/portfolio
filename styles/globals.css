@@ -12,10 +12,19 @@
 	.icon-button {
 		@apply flex justify-center items-center bg-snow w-10 h-10 text-black rounded-lg hover:bg-white hover:opacity-90;
 	}
-	.tab-button {
-		@apply relative px-4 py-2 font-bold;
+	.html-tag {
+		@apply absolute -top-8 md:-top-10 left-0 font-mono font-medium text-xl md:text-2xl hidden sm:inline;
 	}
-	.tab-underline {
-		@apply absolute -bottom-1 left-0 w-full h-1 bg-blue-green;
+	.from-left .img-container {
+		@apply md:col-[1/7];
+	}
+	.from-left .txt-container {
+		@apply md:col-[6/-1] md:row-[2/6];
+	}
+	.from-right .img-container {
+		@apply md:col-[-1/-7];
+	}
+	.from-right .txt-container {
+		@apply md:col-[-6/1] md:row-[-2/-6];
 	}
 }

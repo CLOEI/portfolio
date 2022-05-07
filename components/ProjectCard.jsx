@@ -46,55 +46,47 @@ function ProjectCard({ data }) {
 	const liveLink = fields.liveViewLink;
 
 	return (
-		<div className="flex flex-col md:flex-row md:px-8">
-			<motion.div
-				variants={imgContainerVariant}
-				initial="initial"
-				animate="animate"
-				exit="exit"
-				className="relative w-full md:w-60 h-80 flex-shrink-0"
-			>
-				<Image src={'https:' + image} alt={title} layout="fill" objectFit="cover" />
-			</motion.div>
-			<div className="md:overflow-hidden">
-				<motion.div
-					variants={cardVariants}
-					initial="initial"
-					animate="animate"
-					exit="exit"
-					className="relative bg-snow h-max text-eerie-black mx-2 rounded-lg px-5 pt-4 -mt-[50%] md:mt-0"
-				>
-					<h2 className="text-3xl font-bold">{title}</h2>
-					<p>{description}</p>
-					<p className="py-4 space-y-1">
-						{tags.map((tag, index) => (
-							<span
-								key={index}
-								className="inline-block bg-blue-green text-black px-2 rounded-full mr-2 font-mono"
-							>
-								{tag}
-							</span>
-						))}
-					</p>
-					<motion.div
-						custom={0.2}
-						variants={staggerVariant}
-						className="flex absolute left-0 -bottom-12 space-x-1 overflow-hidden"
-					>
-						<motion.button variants={buttonVariant} className="icon-button">
-							<a href={repoLink} target="_blank" rel="noreferrer">
-								<FiGithub />
-							</a>
-						</motion.button>
-						<motion.button variants={buttonVariant} className="icon-button">
-							<a href={liveLink} target="_blank" rel="noreferrer">
-								<FiExternalLink />
-							</a>
-						</motion.button>
-					</motion.div>
-				</motion.div>
+		<motion.div className="grid grid-cols-12 grid-rows-6 w-full md:w-full odd:from-left even:from-right">
+			<div className="img-container relative col-[1/-1] row-[1/-1] md:rounded-lg overflow-hidden mix-blend-overlay md:mix-blend-normal md:opacity-40 hover:opacity-90">
+				<Image
+					src={'https:' + image}
+					alt={title}
+					layout="fill"
+					objectFit="cover"
+					priority
+				/>
 			</div>
-		</div>
+			<div className="txt-container relative col-[1/-1] row-[1/-1] md:bg-snow md:rounded-lg md:text-eerie-black px-6 py-8">
+				<div className="space-y-2">
+					<h3 className="font-bold text-xl">{title}</h3>
+					<p>{description}</p>
+					<div className="-ml-2 md:ml-0">
+						{tags.map((tag, i) => {
+							return (
+								<span
+									key={i}
+									className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium leading-5 md:bg-gray-100 md:text-gray-800"
+								>
+									{tag}
+								</span>
+							);
+						})}
+					</div>
+				</div>
+				<div className="mt-4">
+					<button className="p-2 -ml-2 hover:opacity-75 text-blue-green md:text-persian-green rounded-lg">
+						<a href={repoLink} target="_blank" rel="noopener noreferrer">
+							<FiGithub size={18} />
+						</a>
+					</button>
+					<button className="p-2 hover:opacity-75 text-blue-green md:text-persian-green rounded-lg">
+						<a href={liveLink} target="_blank" rel="noopener noreferrer">
+							<FiExternalLink size={18} />
+						</a>
+					</button>
+				</div>
+			</div>
+		</motion.div>
 	);
 }
 
