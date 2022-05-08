@@ -39,6 +39,7 @@ function Card({ data }) {
 				<Image
 					src={'https:' + image}
 					alt={title}
+					draggable={false}
 					layout="fill"
 					objectFit="cover"
 					priority

@@ -1,13 +1,36 @@
+import { motion } from 'framer-motion';
+
 import Card from './Card';
 
 function Index({ projects }) {
 	return (
-		<div className="space-y-4 mt-6" key="projects">
+		<motion.div
+			variants={thisVariant}
+			initial="initial"
+			animate="animate"
+			exit="exit"
+			className="space-y-4 mt-6"
+		>
 			{projects.map((project, i) => {
 				return <Card key={i} data={project} />;
 			})}
-		</div>
+		</motion.div>
 	);
 }
+
+const thisVariant = {
+	initial: {
+		x: '-100%',
+	},
+	animate: {
+		x: 0,
+	},
+	exit: {
+		x: '-100%',
+		transition: {
+			type: 'tween',
+		},
+	},
+};
 
 export default Index;

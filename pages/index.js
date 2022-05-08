@@ -19,7 +19,7 @@ function Home({ projects, posts }) {
 				<title>Cendy</title>
 			</Head>
 			<Profile />
-			<div className="py-10 px-2 lg:overflow-y-scroll">
+			<div className="py-10 px-2 lg:overflow-y-scroll lg:overflow-x-hidden">
 				<motion.div className="w-max mx-auto" layout>
 					<button className="tab-button" onClick={setToProjects}>
 						PROJECTS
@@ -34,13 +34,29 @@ function Home({ projects, posts }) {
 						)}
 					</button>
 				</motion.div>
-				<AnimatePresence>
-					{currentTab === 'projects' ? (
-						<Projects projects={projects} />
-					) : (
-						<Blog posts={posts} />
-					)}
-				</AnimatePresence>
+				<motion.div
+					className="h-full"
+					drag="x"
+					dragConstraints={{
+						left: 0,
+						right: 0,
+					}}
+					onDrag={(_, info) => {
+						if (info.offset.x < -100 && info.velocity.x < -500) {
+							setToBlog();
+						} else if (info.offset.x > 100 && info.velocity.x > 500) {
+							setToProjects();
+						}
+					}}
+				>
+					<AnimatePresence exitBeforeEnter initial={false}>
+						{currentTab === 'projects' ? (
+							<Projects projects={projects} key="projects" />
+						) : (
+							<Blog posts={posts} key="blog" />
+						)}
+					</AnimatePresence>
+				</motion.div>
 			</div>
 		</div>
 	);

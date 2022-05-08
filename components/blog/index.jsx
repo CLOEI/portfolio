@@ -1,30 +1,15 @@
-import { useInView } from 'react-intersection-observer';
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import Card from './Card';
 
 function Index({ posts }) {
-	const animation = useAnimation();
-	const { ref, inView } = useInView({
-		threshold: 0.2,
-		triggerOnce: true,
-	});
-
-	useEffect(() => {
-		if (inView) {
-			animation.start('animate');
-		}
-	}, [inView, animation]);
-
 	return (
 		<motion.div
 			variants={thisVariant}
 			initial="initial"
-			animate={animation}
+			animate="animate"
+			exit="exit"
 			className="grid grid-cols-[repeat(auto-fit,_minmax(11.25rem,_1fr))] h-max gap-px mt-6"
-			ref={ref}
-			key="blogs"
 		>
 			{posts.map((post, i) => {
 				return <Card key={i} data={post} />;
@@ -34,9 +19,19 @@ function Index({ posts }) {
 }
 
 const thisVariant = {
+	initial: {
+		x: '100%',
+	},
 	animate: {
+		x: 0,
 		transition: {
 			staggerChildren: 0.5,
+		},
+	},
+	exit: {
+		x: '100%',
+		transition: {
+			type: 'tween',
 		},
 	},
 };
