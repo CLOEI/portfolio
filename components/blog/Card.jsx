@@ -12,7 +12,7 @@ function Card({ data }) {
 		<Link href={`/blog/${slug}`} passHref>
 			<motion.a
 				variants={thisVariant}
-				className="flex flex-col justify-around bg-persian-green aspect-square p-4 hover:-translate-y-1 transition-all ease-linear"
+				className="flex flex-col justify-around h-full bg-persian-green aspect-square p-4 hover:-translate-y-1 transition-all ease-linear"
 			>
 				<div className="space-y-2">
 					<FaStickyNote size={30} />

@@ -18,24 +18,17 @@ function Index({ posts }) {
 	}, [inView, animation]);
 
 	return (
-		<div>
-			<h2 className="relative font-bold text-3xl md:text-5xl opacity-[38%] pb-4">
-				<span className="html-tag">&lt;h2&gt;</span>
-				BLOG
-				<span className="hidden sm:inline">&lt;/h2&gt;</span>
-			</h2>
-			<motion.div
-				variants={thisVariant}
-				initial="initial"
-				animate={animation}
-				className="grid grid-cols-2 md:grid-cols-4 gap-px"
-				ref={ref}
-			>
-				{posts.map((post, i) => {
-					return <Card key={i} data={post} />;
-				})}
-			</motion.div>
-		</div>
+		<motion.div
+			variants={thisVariant}
+			initial="initial"
+			animate={animation}
+			className={`grid grid-cols-[repeat(auto-fit,_minmax(11.25rem,_1fr))] h-max gap-px mt-6 grid-flow-row`}
+			ref={ref}
+		>
+			{posts.map((post, i) => {
+				return <Card key={i} data={post} />;
+			})}
+		</motion.div>
 	);
 }
 

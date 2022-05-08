@@ -9,6 +9,12 @@
 }
 
 @layer components {
+	.tab-button {
+		@apply relative px-6 py-4 font-bold;
+	}
+	.tab-underline {
+		@apply absolute -bottom-1 left-0 right-0 border-blue-green border-2;
+	}
 	.icon-button {
 		@apply flex justify-center items-center bg-snow w-10 h-10 text-black rounded-lg hover:bg-white hover:opacity-90;
 	}
@@ -16,15 +22,15 @@
 		@apply absolute -top-8 md:-top-10 left-0 font-mono font-medium text-xl md:text-2xl hidden sm:inline;
 	}
 	.from-left .img-container {
-		@apply md:col-[1/7];
+		@apply md:col-[1/9];
 	}
 	.from-left .txt-container {
-		@apply md:col-[6/-1] md:row-[2/6];
+		@apply md:col-[6/-1] md:row-[1/-1];
 	}
 	.from-right .img-container {
-		@apply md:col-[-1/-7];
+		@apply md:col-[-1/-9];
 	}
 	.from-right .txt-container {
-		@apply md:col-[-6/1] md:row-[-2/-6];
+		@apply md:col-[-6/1] md:row-[1/-1];
 	}
 }

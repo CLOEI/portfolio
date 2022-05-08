@@ -8,8 +8,7 @@ import Image from 'next/image';
 function Card({ data }) {
 	const animation = useAnimation();
 	const { ref, inView } = useInView({
-		threshold: 0.5,
-		triggerOnce: true,
+		threshold: 0.1,
 	});
 
 	const { fields } = data;
@@ -23,6 +22,8 @@ function Card({ data }) {
 	useEffect(() => {
 		if (inView) {
 			animation.start('animate');
+		} else {
+			animation.start('initial');
 		}
 	}, [inView, animation]);
 
@@ -31,10 +32,10 @@ function Card({ data }) {
 			variants={thisVariant}
 			initial="initial"
 			animate={animation}
-			className="grid grid-cols-12 grid-rows-6 w-full md:w-full odd:from-left even:from-right"
+			className="grid grid-cols-12 grid-rows-1 w-full odd:from-left even:from-right"
 			ref={ref}
 		>
-			<div className="img-container relative col-[1/-1] row-[1/-1] md:rounded-lg overflow-hidden mix-blend-overlay md:mix-blend-normal md:opacity-40 hover:opacity-90">
+			<div className="img-container relative col-[1/-1] row-[1/-1] md:rounded-lg overflow-hidden opacity-25 md:opacity-40 hover:opacity-90">
 				<Image
 					src={'https:' + image}
 					alt={title}
