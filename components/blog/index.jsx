@@ -22,8 +22,9 @@ function Index({ posts }) {
 			variants={thisVariant}
 			initial="initial"
 			animate={animation}
-			className={`grid grid-cols-[repeat(auto-fit,_minmax(11.25rem,_1fr))] h-max gap-px mt-6 grid-flow-row`}
+			className="grid grid-cols-[repeat(auto-fit,_minmax(11.25rem,_1fr))] h-max gap-px mt-6"
 			ref={ref}
+			key="blogs"
 		>
 			{posts.map((post, i) => {
 				return <Card key={i} data={post} />;

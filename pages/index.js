@@ -14,12 +14,12 @@ function Home({ projects, posts }) {
 	const setToBlog = () => setCurrentTab('blog');
 
 	return (
-		<div className="grid md:grid-cols-[30rem_1fr] md:h-screen gap-x-10 overflow-hidden">
+		<div className="grid lg:grid-cols-[30rem_1fr] lg:h-screen gap-x-10 overflow-hidden">
 			<Head>
 				<title>Cendy</title>
 			</Head>
 			<Profile />
-			<div className="py-10 px-2 md:overflow-y-scroll">
+			<div className="py-10 px-2 lg:overflow-y-scroll">
 				<motion.div className="w-max mx-auto" layout>
 					<button className="tab-button" onClick={setToProjects}>
 						PROJECTS

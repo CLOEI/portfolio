@@ -47,7 +47,7 @@ const buttonVariant = {
 
 function Profile() {
 	return (
-		<div className="flex flex-col px-2 md:pr-0 md:px-4 my-10 md:my-0 h-full items-center md:items-start justify-center space-y-3">
+		<div className="flex flex-col px-2 lg:pr-0 lg:px-4 my-10 lg:my-0 h-full items-center lg:items-start justify-center space-y-3">
 			<div className="relative overflow-hidden">
 				<div className="relative w-60 h-60 md:w-48 md:h-48 mb-10 rounded-full overflow-hidden flex-shrink-0">
 					<Image
