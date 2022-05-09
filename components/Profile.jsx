@@ -6,45 +6,6 @@ import Image from 'next/image';
 import { staggerVariant } from '../utils/variants';
 import ProfileImage from '../public/profile.jpeg';
 
-const leftVariants = {
-	initial: {
-		left: '-100%',
-	},
-	animate: (custom) => {
-		return {
-			left: custom.left,
-			transition: {
-				delay: 0.3 + custom.delay,
-				x: { type: 'spring', stiffness: 100 },
-				default: { duration: 2 },
-			},
-		};
-	},
-};
-const rightVariants = {
-	initial: {
-		right: '-100%',
-	},
-	animate: {
-		right: 0,
-		transition: {
-			x: { type: 'spring', stiffness: 100 },
-			default: { duration: 2 },
-		},
-	},
-};
-const buttonVariant = {
-	initial: {
-		x: '-250%',
-	},
-	animate: {
-		x: 0,
-		transition: {
-			x: { type: 'spring', stiffness: 60 },
-		},
-	},
-};
-
 function Profile() {
 	return (
 		<div className="flex flex-col px-2 lg:pr-0 lg:px-4 my-10 lg:my-0 h-full items-center lg:items-start justify-center space-y-3">
@@ -128,5 +89,44 @@ function Profile() {
 		</div>
 	);
 }
+
+const leftVariants = {
+	initial: {
+		left: '-100%',
+	},
+	animate: (custom) => {
+		return {
+			left: custom.left,
+			transition: {
+				delay: 0.3 + custom.delay,
+				x: { type: 'spring', stiffness: 100 },
+				default: { duration: 2 },
+			},
+		};
+	},
+};
+const rightVariants = {
+	initial: {
+		right: '-100%',
+	},
+	animate: {
+		right: 0,
+		transition: {
+			x: { type: 'spring', stiffness: 100 },
+			default: { duration: 2 },
+		},
+	},
+};
+const buttonVariant = {
+	initial: {
+		x: '-250%',
+	},
+	animate: {
+		x: 0,
+		transition: {
+			x: { type: 'spring', stiffness: 60 },
+		},
+	},
+};
 
 export default Profile;

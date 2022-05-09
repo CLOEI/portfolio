@@ -14,7 +14,7 @@ function Home({ projects, posts }) {
 	const setToBlog = () => setCurrentTab('blog');
 
 	return (
-		<div className="grid lg:grid-cols-[30rem_1fr] lg:h-screen gap-x-10 overflow-hidden">
+		<div className="grid lg:grid-cols-[30rem_1fr] lg:h-screen gap-x-28 overflow-hidden">
 			<Head>
 				<title>Cendy</title>
 			</Head>
@@ -35,7 +35,6 @@ function Home({ projects, posts }) {
 					</button>
 				</motion.div>
 				<motion.div
-					className="h-full"
 					drag="x"
 					dragConstraints={{
 						left: 0,
