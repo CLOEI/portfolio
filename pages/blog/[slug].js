@@ -6,6 +6,38 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { FiArrowLeft } from 'react-icons/fi';
 
+function Blog({ post }) {
+	const {
+		fields: { title },
+		sys: { createdAt },
+	} = post[0];
+
+	return (
+		<div className="m-3">
+			<Head>
+				<title>{post[0].fields.title}</title>
+			</Head>
+			<nav>
+				<Link href="/">
+					<a className="block w-max text-white rounded-full">
+						<FiArrowLeft size={42} />
+					</a>
+				</Link>
+			</nav>
+			<h1 className="text-4xl font-bold my-3">{title}</h1>
+			<span className="opacity-[87%]">
+				{new Date(createdAt).toLocaleDateString('id-ID', {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				})}
+			</span>
+			{documentToReactComponents(post[0].fields.body, renderOptions)}
+		</div>
+	);
+}
+
 const renderOptions = {
 	renderNode: {
 		[BLOCKS.EMBEDDED_ASSET]: (node) => {
@@ -20,46 +52,27 @@ const renderOptions = {
 				</div>
 			);
 		},
-		[BLOCKS.PARAGRAPH]: (node, children) => (
-			<p className="text-high leading-6 my-2">{children}</p>
+		[BLOCKS.PARAGRAPH]: (_, children) => (
+			<p className="leading-6 my-2">{children}</p>
 		),
-		[BLOCKS.HEADING_2]: (node, children) => (
-			<h2 className="text-high font-bold text-3xl my-2">{children}</h2>
+		[BLOCKS.HEADING_2]: (_, children) => (
+			<h2 className="font-bold text-3xl my-2">{children}</h2>
 		),
-		[BLOCKS.HEADING_3]: (node, children) => (
-			<h3 className="text-high font-bold text-2xl my-2">{children}</h3>
+		[BLOCKS.HEADING_3]: (_, children) => (
+			<h3 className="font-bold text-2xl my-2">{children}</h3>
 		),
 		[INLINES.HYPERLINK]: (node, children) => (
 			<a
 				href={node.data.uri}
 				target="_blank"
 				rel="noreferrer"
-				className="text-medium underline"
+				className="underline opacity-[87%]"
 			>
 				{children}
 			</a>
 		),
 	},
 };
-
-function Blog({ post }) {
-	return (
-		<div className="m-3">
-			<Head>
-				<title>{post[0].fields.title}</title>
-			</Head>
-			<nav>
-				<Link href="/">
-					<a className="block text-high w-max bg-dark-02dp text-white rounded-full hover:bg-dark-onhover">
-						<FiArrowLeft size={42} />
-					</a>
-				</Link>
-			</nav>
-			<h1 className="text-high text-4xl font-bold my-3">{post[0].fields.title}</h1>
-			{documentToReactComponents(post[0].fields.body, renderOptions)}
-		</div>
-	);
-}
 
 export async function getStaticPaths() {
 	const client = require('../../contentful');
