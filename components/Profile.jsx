@@ -46,8 +46,7 @@ function Profile() {
 					className="absolute w-[35%] h-2 bg-blue-green rounded-full bottom-5"
 				></motion.div>
 			</div>
-			<div className="">
-				<p className="opacity-60 text-xs">Hello my name</p>
+			<div>
 				<h1 className="font-bold text-5xl overflow-hidden">Cendy</h1>
 				<p className="max-w-md my-4 opacity-[87%]">
 					I&apos;m a self-taught developer. My interest in web development started

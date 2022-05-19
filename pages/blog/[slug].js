@@ -1,3 +1,5 @@
+import TimeAgo from 'react-timeago';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -25,14 +27,7 @@ function Blog({ post }) {
 				</Link>
 			</nav>
 			<h1 className="text-4xl font-bold my-3">{title}</h1>
-			<span className="opacity-[87%]">
-				{new Date(createdAt).toLocaleDateString('id-ID', {
-					weekday: 'long',
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric',
-				})}
-			</span>
+			<TimeAgo date={createdAt} className="opacity-[87%]" />
 			{documentToReactComponents(post[0].fields.body, renderOptions)}
 		</div>
 	);
