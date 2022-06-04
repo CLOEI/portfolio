@@ -78,5 +78,6 @@ export async function getStaticProps() {
 			projects: projects.items,
 			posts: posts.items,
 		},
+		revalidate: 60, // revalidate the page every 60 seconds
 	};
 }
