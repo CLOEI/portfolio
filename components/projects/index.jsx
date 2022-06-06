@@ -24,6 +24,9 @@ const thisVariant = {
 	},
 	animate: {
 		x: 0,
+		transition: {
+			type: 'tween',
+		},
 	},
 	exit: {
 		x: '-100%',

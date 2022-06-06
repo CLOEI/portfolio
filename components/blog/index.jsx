@@ -26,6 +26,7 @@ const thisVariant = {
 		x: 0,
 		transition: {
 			staggerChildren: 0.5,
+			type: 'tween',
 		},
 	},
 	exit: {
