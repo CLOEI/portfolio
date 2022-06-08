@@ -9,7 +9,7 @@ function Card({ data }) {
 	const slug = data.fields.slug;
 
 	return (
-		<Link href={`/blog/${slug}`} passHref>
+		<Link href={`/blog/${slug}`} passHref scroll={false}>
 			<motion.a
 				variants={thisVariant}
 				className="flex flex-col justify-around h-full bg-persian-green aspect-square p-4 hover:-translate-y-1 transition-all ease-linear"

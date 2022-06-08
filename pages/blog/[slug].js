@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import TimeAgo from 'react-timeago';
 
 import Image from 'next/image';
@@ -15,12 +16,17 @@ function Blog({ post }) {
 	} = post[0];
 
 	return (
-		<div className="m-3">
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+			className="m-3"
+		>
 			<Head>
 				<title>{post[0].fields.title}</title>
 			</Head>
 			<nav>
-				<Link href="/">
+				<Link href="/blog">
 					<a className="block w-max text-white rounded-full">
 						<FiArrowLeft size={42} />
 					</a>
@@ -29,7 +35,7 @@ function Blog({ post }) {
 			<h1 className="text-4xl font-bold my-3">{title}</h1>
 			<TimeAgo date={createdAt} className="opacity-[87%]" />
 			{documentToReactComponents(post[0].fields.body, renderOptions)}
-		</div>
+		</motion.div>
 	);
 }
 
