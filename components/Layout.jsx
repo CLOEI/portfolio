@@ -12,14 +12,6 @@ function Layout({ children }) {
 	const setToProjects = () => router.push('/', undefined, { scroll: false });
 	const setToBlog = () => router.push('/blog', undefined, { scroll: false });
 
-	const handleDrag = (_, { offset, velocity }) => {
-		if (offset.x < -100 && velocity.x < -500) {
-			setToBlog();
-		} else if (offset.x > 100 && velocity.x > 500) {
-			setToProjects();
-		}
-	};
-
 	return (
 		<div className="grid lg:grid-cols-[30rem_1fr] lg:h-screen gap-x-28 overflow-hidden">
 			<Head>
@@ -41,17 +33,7 @@ function Layout({ children }) {
 						)}
 					</button>
 				</motion.div>
-				<motion.div
-					drag="x"
-					dragConstraints={{
-						left: 0,
-						right: 0,
-					}}
-					dragDirectionLock
-					onDrag={handleDrag}
-				>
-					{children}
-				</motion.div>
+				{children}
 			</div>
 		</div>
 	);
