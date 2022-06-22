@@ -18,20 +18,22 @@ function Menu({ toggled, toggle }: Props) {
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={
-          toggled
-            ? {
-                opacity: 1,
-              }
-            : {
-                opacity: 0,
-              }
-        }
-        onClick={toggle}
-        className="z-40 fixed inset-0 bg-black/80"
-      ></motion.div>
+      {toggled && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={
+            toggled
+              ? {
+                  opacity: 1,
+                }
+              : {
+                  opacity: 0,
+                }
+          }
+          onClick={toggle}
+          className="z-40 fixed inset-0 bg-black/80"
+        ></motion.div>
+      )}
       <motion.div
         initial="initial"
         animate={toggled ? "animate" : "hidden"}

@@ -1,13 +1,13 @@
-import type { NextPage } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Head from "next/head";
 import Hero from "../components/Hero";
 import Menu from "../components/Menu";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ projects }: any) => {
   const [toggled, setToggled] = useState(false);
-
+  console.log(projects);
   const toggle = () => setToggled(!toggled);
 
   return (
@@ -26,10 +26,28 @@ const Home: NextPage = () => {
         <q>You only live once, but if you do it right, once is enough.</q>
         <p className="text-right">― Mae West</p>
       </div>
-      <div></div>
+      <div className="mt-5">
+        {/* {projects.map((item, i) => {
+          return <div>Hello</div>;
+        })} */}
+      </div>
       <Menu toggled={toggled} toggle={toggle} />
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const client = require("../contentful");
+  const projects = await client.getEntries({
+    content_type: "projects",
+  });
+
+  return {
+    props: {
+      projects: projects.items,
+    },
+    revalidate: 10,
+  };
 };
 
 export default Home;
