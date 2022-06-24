@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, type Variant } from "framer-motion";
 import { Project } from "../@types/contentful";
 
 type Props = {
@@ -7,8 +8,11 @@ type Props = {
 
 function ProjectCard({ item }: Props) {
   return (
-    <div className="w-full bg-[#1d1d1d] p-2">
-      <h2 className="font-mono">{item.fields.title}</h2>
+    <motion.div
+      variants={thisVariant}
+      className="flex flex-col w-full bg-[#1d1d1d] p-2"
+    >
+      <h3 className="font-mono">{item.fields.title}</h3>
       <ul className="flex flex-wrap gap-1">
         {item.fields.tags.map((item, i) => {
           return (
@@ -18,8 +22,18 @@ function ProjectCard({ item }: Props) {
           );
         })}
       </ul>
-    </div>
+      <button className="ml-auto mt-auto w-max">― View</button>
+    </motion.div>
   );
 }
+
+const thisVariant: { [x: string]: Variant } = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+};
 
 export default ProjectCard;

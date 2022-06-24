@@ -71,6 +71,11 @@ export interface IProjects extends Entry<IProjectsFields> {
   };
 }
 
+export type Post = {
+  fields: IPostFields;
+  sys: IPost;
+};
+
 export type Project = {
   fields: IProjectsFields;
   sys: IProjectsFields;

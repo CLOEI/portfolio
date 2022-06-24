@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variant } from "framer-motion";
 import { useEffect } from "react";
 
 type Props = {
@@ -60,7 +60,7 @@ function Menu({ toggled, toggle }: Props) {
   );
 }
 
-const buttonVariant = {
+const buttonVariant: { [x: string]: Variant } = {
   initial: {
     x: "100%",
   },
@@ -72,7 +72,7 @@ const buttonVariant = {
   },
 };
 
-const containerVariant = {
+const containerVariant: { [x: string]: Variant } = {
   initial: {
     x: "100%",
   },
