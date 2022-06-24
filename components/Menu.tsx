@@ -47,13 +47,13 @@ function Menu({ toggled, toggle }: Props) {
           variants={buttonVariant}
           className="font-mono block px-4 py-2 w-full"
         >
-          Projects
+          <a href="#projects">Projects</a>
         </motion.button>
         <motion.button
           variants={buttonVariant}
           className="font-mono block px-4 py-2 w-full"
         >
-          Blog
+          <a href="#blog">Blog</a>
         </motion.button>
       </motion.div>
     </>

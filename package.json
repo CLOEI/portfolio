@@ -3,10 +3,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output @types/contentful.d.ts"
   },
   "dependencies": {
     "contentful": "^9.1.32",
+    "contentful-management": "^10.6.3",
     "framer-motion": "^6.3.11",
     "next": "latest",
     "react": "18.1.0",
@@ -18,7 +20,9 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
+    "contentful-typescript-codegen": "^3.2.3",
     "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
     "tailwindcss": "^3.1.2",
     "typescript": "4.7.2"
   }
