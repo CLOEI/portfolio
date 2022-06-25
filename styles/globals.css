@@ -7,6 +7,11 @@
     @apply bg-[#121212] text-white;
   }
 }
+@layer components {
+  .project-button {
+    @apply block ml-auto w-max hover:translate-x-1 hover:text-white/40 transition-all;
+  }
+}
 
 .disable-scroll {
   overflow: hidden;

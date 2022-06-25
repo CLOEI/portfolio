@@ -1,6 +1,5 @@
-import React from "react";
+import type { Project } from "../@types/contentful";
 import { motion, type Variant } from "framer-motion";
-import { Project } from "../@types/contentful";
 
 type Props = {
   item: Project;
@@ -22,7 +21,18 @@ function ProjectCard({ item }: Props) {
           );
         })}
       </ul>
-      <button className="ml-auto mt-auto w-max">― View</button>
+      <div className="mt-auto">
+        <button className="project-button">
+          <a href={item.fields.repositoryLink} target="_blank">
+            ― Source code
+          </a>
+        </button>
+        <button className="project-button">
+          <a href={item.fields.liveViewLink} target="_blank">
+            ― View
+          </a>
+        </button>
+      </div>
     </motion.div>
   );
 }
