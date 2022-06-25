@@ -11,6 +11,9 @@ function Projects({ projects, isIndex }: Props) {
   return (
     <motion.div
       variants={thisVariant}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true }}
       className="grid grid-cols-2 md:grid-cols-3 gap-1 mt-5"
     >
       {projects.slice(0, isIndex ? 6 : projects.length).map((item, i) => {

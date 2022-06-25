@@ -11,7 +11,7 @@ function ProjectCard({ item }: Props) {
       variants={thisVariant}
       className="flex flex-col w-full bg-[#1d1d1d] p-2"
     >
-      <h3 className="font-mono">{item.fields.title}</h3>
+      <h3 className="font-mono py-2">{item.fields.title}</h3>
       <ul className="flex flex-wrap gap-1">
         {item.fields.tags.map((item, i) => {
           return (
@@ -21,7 +21,7 @@ function ProjectCard({ item }: Props) {
           );
         })}
       </ul>
-      <div className="mt-auto">
+      <div className="mt-auto py-2">
         <button className="project-button">
           <a href={item.fields.repositoryLink} target="_blank">
             ― Source code

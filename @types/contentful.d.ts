@@ -71,15 +71,13 @@ export interface IProjects extends Entry<IProjectsFields> {
   };
 }
 
-export type Post = {
+export interface Post extends IPost {
   fields: IPostFields;
-  sys: IPost;
-};
+}
 
-export type Project = {
+export interface Project extends IProjects {
   fields: IProjectsFields;
-  sys: IProjectsFields;
-};
+}
 
 export type CONTENT_TYPE = "post" | "projects";
 

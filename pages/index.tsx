@@ -36,17 +36,13 @@ const Home: NextPage<Props> = ({ projects, posts }) => {
         <q>You only live once, but if you do it right, once is enough.</q>
         <p className="text-right">― Mae West</p>
       </div>
-      <motion.div
-        id="projects"
-        variants={projectVariant}
-        viewport={{ once: true }}
-        initial="initial"
-        whileInView="animate"
-        className="space-y-2"
-      >
+      <div id="projects" className="space-y-2">
         <Projects projects={projects} isIndex />
         <motion.button
           variants={opacityVariant}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
           className="block ml-auto w-max text-blue-500 hover:text-blue-500/90 transition-colors"
         >
           <Link href="/projects">
@@ -56,7 +52,7 @@ const Home: NextPage<Props> = ({ projects, posts }) => {
             </a>
           </Link>
         </motion.button>
-      </motion.div>
+      </div>
       <motion.div
         id="blog"
         variants={opacityVariant}
