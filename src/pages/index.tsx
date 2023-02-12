@@ -1,15 +1,26 @@
 import Head from 'next/head'
 import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai"
 import { RxStack } from "react-icons/rx"
-import { VscGithubAlt } from "react-icons/vsc"
-import { BiLinkExternal } from "react-icons/bi"
+import { motion } from 'framer-motion'
+
+import ProjectCard from '@/components/ProjectCard'
 
 import client from "../../cms"
-
-import Image from "next/image"
+import { useEffect, useState } from 'react'
 
 export default function Home({ projects }) {
-  console.log(projects)
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        setIsVisible(true)
+      } else{
+        setIsVisible(false)
+      }
+    })
+  }, [])
+  
   return (
     <>
       <Head>
@@ -18,49 +29,49 @@ export default function Home({ projects }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className='max-w-sm mx-auto p-2'>
+        {isVisible && (
+          <div className='fixed inset-0 p-4 flex max-w-sm mx-auto justify-between h-max items-center z-20 bg-card  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0'>
+            <motion.p className='font-bold text-2xl' initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Cendy</motion.p>
+            <motion.div layout="position" layoutId='button' className='space-x-2'>
+              <motion.a href="#projects" className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0}>
+                <RxStack size={24} className="group-hover:text-rose-500"/>
+              </motion.a>
+              <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0}>
+                <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
+              </motion.a>
+              <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0}>
+                <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
+              </motion.a>
+          </motion.div>
+        </div>
+        )}
         <div>
           <div className='h-screen flex items-center justify-center flex-col space-y-6'>
             <div className='text-center'>
-              <h1 className='text-5xl font-bold'>Hi, I&apos;m Cendy.</h1>
+              <motion.h1 className='text-5xl font-bold'>Hi, I&apos;m Cendy.</motion.h1>
               <p className='text-paragraph'>Probably a full-stack developer.</p>
             </div>
-            <div className='space-x-2'>
-              <a href="#projects" className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0}>
+            <motion.div layout='position' layoutId='button' className='space-x-2 items-center' variants={container} initial="hidden" animate="show">
+              <motion.a href="#projects" className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0} variants={item}>
                 <RxStack size={24} className="group-hover:text-rose-500"/>
-              </a>
-              <a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0}>
+              </motion.a>
+              <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0} variants={item}>
                 <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
-              </a>
-              <a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0}>
+              </motion.a>
+              <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0} variants={item}>
                 <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </div>
         </div>
         <div id="projects">
-          <ol className='relative border-l border-card'>
+          <motion.ol className='relative border-l border-card' initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
             {projects.map((project, i) => {
               return (
-                <li key={i} className="mb-10 ml-4">
-                  <div className='absolute w-3 h-3 bg-card rounded-full mt-1.5 -left-1.5 border border-rose-500'></div>
-                  <div className="relative w-full h-60 overflow-hidden rounded-md">
-                    <Image src={'https:' + project.fields.image.fields.file.url} fill={true} alt="" objectFit='cover'/>
-                  </div>
-                  <div className='z-10 bg-card w-[90%] rounded-md mx-auto p-4 relative -mt-10'>
-                    <h2 className='font-bold text-3xl'>{project.fields.title}</h2>
-                    <div className='w-max ml-auto space-x-2'>
-                      <a href="JavaScript:void(0)" className="inline-block hover:opacity-75" aria-label='Source code' role="button" tabIndex={0}>
-                        <VscGithubAlt className="text-rose-500"/>
-                      </a>
-                      <a href="JavaScript:void(0)" className="inline-block hover:opacity-75" aria-label='Live preview' role="button" tabIndex={0}>
-                        <BiLinkExternal className="text-rose-500"/>
-                      </a>
-                    </div>
-                  </div>
-                </li>
+                <ProjectCard project={project} key={i}/>
               )
             })}
-          </ol>
+          </motion.ol>
         </div>
       </div>
     </>
@@ -78,4 +89,19 @@ export const getStaticProps = async () => {
 		},
 		revalidate: 10,
 	};
+}
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 }
 }
