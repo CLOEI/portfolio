@@ -2,13 +2,14 @@ import Head from 'next/head'
 import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai"
 import { RxStack } from "react-icons/rx"
 import { motion } from 'framer-motion'
-
-import ProjectCard from '@/components/ProjectCard'
-
-import client from "../../cms"
 import { useEffect, useState } from 'react'
 
-export default function Home({ projects }) {
+import client from "../../cms"
+
+import ProjectCard from '@/components/ProjectCard'
+import type { IProjects } from '@/types/contentful'
+
+export default function Home({ projects } : { projects: IProjects[] }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
