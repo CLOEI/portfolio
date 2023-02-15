@@ -10,6 +10,7 @@ import ProjectCard from '@/components/ProjectCard'
 import type { IProjects } from '@/types/contentful'
 
 export default function Home({ projects } : { projects: IProjects[] }) {
+  const [ftl, setFTL] = useState(true)
   const [isVisible, setIsVisible] = useState(false);
   const projectsRef = useRef<null | HTMLDivElement>(null);
 
@@ -21,6 +22,8 @@ export default function Home({ projects } : { projects: IProjects[] }) {
         setIsVisible(false)
       }
     })
+
+    setFTL(false)
   }, [])
 
   const goToProjects = () => projectsRef.current?.scrollIntoView()
@@ -37,7 +40,7 @@ export default function Home({ projects } : { projects: IProjects[] }) {
         {isVisible && (
             <motion.div className='fixed inset-0 p-4 flex max-w-sm mx-auto justify-between h-max items-center z-20 bg-card  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0' initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <p className='font-bold text-2xl'>Cendy</p>
-              <motion.div layout="position" layoutId='button' className='space-x-2'>
+              <motion.div layout="position" layoutId='button' className='space-x-2 flex'>
                 <motion.a onClick={goToProjects} className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0}>
                   <RxStack size={24} className="group-hover:text-rose-500"/>
                 </motion.a>
@@ -53,23 +56,25 @@ export default function Home({ projects } : { projects: IProjects[] }) {
         </AnimatePresence>
         <div>
           <div className='h-screen flex items-center justify-center flex-col space-y-6'>
-            <div className='text-center'>
+            <div className='text-center relative'>
               <motion.h1 className='text-5xl font-bold'>Hi, I&apos;m Cendy.</motion.h1>
               <p className='text-paragraph'>Probably a full-stack developer.</p>
+              {!isVisible && (
+                <div className='absolute bottom-0 right-[50%] translate-y-[150%] translate-x-[50%]'>
+                  <motion.div layout='position' layoutId='button' className='flex space-x-2 items-center' variants={ftl ? container : undefined} initial="hidden" animate="show">
+                    <motion.a onClick={goToProjects} className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0} variants={item}>
+                      <RxStack size={24} className="group-hover:text-rose-500"/>
+                    </motion.a>
+                    <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0} variants={item}>
+                      <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
+                    </motion.a>
+                    <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0} variants={item}>
+                      <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
+                    </motion.a>
+                  </motion.div>
+                </div>
+              )}
             </div>
-            {!isVisible && (
-              <motion.div layout='position' layoutId='button' className='space-x-2 items-center' variants={container} initial="hidden" animate="show">
-                <motion.a onClick={goToProjects} className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0} variants={item}>
-                  <RxStack size={24} className="group-hover:text-rose-500"/>
-                </motion.a>
-                <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0} variants={item}>
-                  <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
-                </motion.a>
-                <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0} variants={item}>
-                  <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
-                </motion.a>
-              </motion.div>
-            )}
           </div>
         </div>
         <div ref={projectsRef}>

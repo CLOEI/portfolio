@@ -4,6 +4,6 @@
 
 @layer components {
   .icon-button {
-    @apply inline-block p-3 bg-card rounded-lg relative after:absolute after:-bottom-8 after:left-[50%] after:translate-x-[-50%] hover:border-rose-500 border-2 border-transparent cursor-pointer;
+    @apply block p-3 bg-card rounded-lg relative after:absolute after:-bottom-8 after:left-[50%] after:translate-x-[-50%] hover:border-rose-500 border-2 border-transparent cursor-pointer;
   }
 }
