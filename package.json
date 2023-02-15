@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
+    "codegen": "contentful-typescript-codegen --output src/types/contentful.d.ts"
   },
   "dependencies": {
     "@next/font": "13.1.6",
