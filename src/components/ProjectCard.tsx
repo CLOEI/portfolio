@@ -3,17 +3,14 @@ import { motion, useAnimationControls, useInView } from "framer-motion";
 
 import { BiLinkExternal } from "react-icons/bi";
 import { VscGithubAlt } from "react-icons/vsc";
-import { SiTailwindcss, SiJavascript } from "react-icons/si";
-import { RiCss3Fill } from "react-icons/ri";
-import { ImHtmlFive2 } from "react-icons/im";
-import { IoLogoPwa, IoLogoSass } from "react-icons/io5";
-import { TbBrandNextjs } from "react-icons/tb";
-
 
 import type { IProjects } from "@/types/contentful";
 import { useEffect, useRef } from "react";
+import useWindowSize from "@/hooks/useWindowSize";
+import tagToComponent from "@/utils/tagToComponent";
 
 function ProjectCard({ project }: { project: IProjects }) {
+  const { width } = useWindowSize()
   const control = useAnimationControls()
   const containerRef = useRef(null)
   const inView = useInView(containerRef, {
@@ -28,19 +25,6 @@ function ProjectCard({ project }: { project: IProjects }) {
     }
   }, [inView, control])
 
-  const tagToComponent = (tag: string) => {
-    const tags = {
-      "Next.js": <TbBrandNextjs size={25}/>,
-      "Tailwind CSS": <SiTailwindcss size={25}/>,
-      "PWA" : <IoLogoPwa size={25}/>,
-      "HTML" : <ImHtmlFive2 size={25}/>,
-      "JavaScript" : <SiJavascript size={25}/>,
-      "CSS" : <RiCss3Fill size={25}/>,
-      "SCSS" : <IoLogoSass size={25}/>,
-    }
-
-    return tags[tag as keyof typeof tags]
-  }
 
   return (
     <motion.li className="mb-10 ml-4" initial={{ opacity: 0.75 }} whileInView={{ opacity: 1 }} viewport={{ amount: "all" }} ref={containerRef}>
@@ -49,11 +33,11 @@ function ProjectCard({ project }: { project: IProjects }) {
         <div className="relative w-full h-60 rounded-md overflow-hidden">
           <Image src={'https:' + project.fields.image.fields.file.url} fill={true} alt="" className="object-cover opacity-75"/>
         </div>
-        {window.innerWidth >= 600 && (
+        {width && width >= 600 && (
           <motion.div className="absolute top-0 right-0 space-y-3 pt-2 translate-x-[150%] overflow-hidden" variants={container} initial="hidden" animate={control}>
             {project.fields.tags.map((tag, i) => {
               return (
-                <motion.div key={i} variants={item}>
+                <motion.div key={i} variants={item} className="cursor-pointer">
                   {tagToComponent(tag)}
                 </motion.div>
               )
