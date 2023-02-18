@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai"
+import { AiOutlineMail, AiOutlineGithub } from "react-icons/ai"
 import { RxStack } from "react-icons/rx"
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 import client from "../../cms"
@@ -44,10 +44,10 @@ export default function Home({ projects } : { projects: IProjects[] }) {
                 <motion.a onClick={goToProjects} className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0}>
                   <RxStack size={24} className="group-hover:text-rose-500"/>
                 </motion.a>
-                <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0}>
-                  <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
+                <motion.a href="https://github.com/CLOEI" target="_blank" rel="noreferrer" className="icon-button hover:after:content-['GitHub'] group" aria-label='GitHub' role="button" tabIndex={0}>
+                  <AiOutlineGithub size={24} className="group-hover:text-rose-500"/> 
                 </motion.a>
-                <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0}>
+                <motion.a href="mailto:contact@cendy.co" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0}>
                   <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
                 </motion.a>
               </motion.div>
@@ -65,10 +65,10 @@ export default function Home({ projects } : { projects: IProjects[] }) {
                     <motion.a onClick={goToProjects} className="icon-button hover:after:content-['Projects'] group" aria-label='Project list' role="button" tabIndex={0} variants={item}>
                       <RxStack size={24} className="group-hover:text-rose-500"/>
                     </motion.a>
-                    <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Instagram'] group" aria-label='Instagram' role="button" tabIndex={0} variants={item}>
-                      <AiOutlineInstagram size={24} className="group-hover:text-rose-500"/> 
+                    <motion.a href="https://github.com/CLOEI" target="_blank" rel="noreferrer" className="icon-button hover:after:content-['GitHub'] group" aria-label='GitHub' role="button" tabIndex={0} variants={item}>
+                      <AiOutlineGithub size={24} className="group-hover:text-rose-500"/> 
                     </motion.a>
-                    <motion.a href="JavaScript:void(0)" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0} variants={item}>
+                    <motion.a href="mailto:contact@cendy.co" className="icon-button hover:after:content-['Email'] group" aria-label='Email' role="button" tabIndex={0} variants={item}>
                       <AiOutlineMail size={24} className="group-hover:text-rose-500"/>
                     </motion.a>
                   </motion.div>
