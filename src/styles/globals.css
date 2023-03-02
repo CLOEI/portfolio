@@ -7,3 +7,18 @@
     @apply block p-3 bg-card rounded-lg relative after:absolute after:-bottom-8 after:left-[50%] after:translate-x-[-50%] hover:border-rose-500 border-2 border-transparent cursor-pointer;
   }
 }
+
+@layer base {
+  html {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Raleway', sans-serif;
+  }
+}

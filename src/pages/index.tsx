@@ -32,7 +32,7 @@ export default function Home({ projects } : { projects: IProjects[] }) {
     <>
       <Head>
         <title>Cendy</title>
-        <meta name="description" content="" />
+        <meta name="description" content="Full stack developer specialize in web development using JavaScript, CSS, HTML, and probably more. love to tinker with computers and stuff!" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className='max-w-sm mx-auto p-2'>
