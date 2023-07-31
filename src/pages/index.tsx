@@ -58,7 +58,7 @@ export default function Home({ projects } : { projects: IProjects[] }) {
           <div className='h-screen flex items-center justify-center flex-col space-y-6'>
             <div className='text-center relative'>
               <motion.h1 className='text-5xl font-bold'>Hi, I&apos;m Cendy.</motion.h1>
-              <p className='text-paragraph'>Probably a full-stack developer.</p>
+              <p className='text-paragraph'>a full-stack developer.</p>
               {!isVisible && (
                 <div className='absolute bottom-0 right-[50%] translate-y-[150%] translate-x-[50%]'>
                   <motion.div layout='position' layoutId='button' className='flex space-x-2 items-center' variants={ftl ? container : undefined} initial="hidden" animate="show">
