@@ -49,9 +49,11 @@ function ProjectCard({ project }: { project: IProjects }) {
         <h2 className='font-bold text-3xl mb-2'>{project.fields.title}</h2>
         <p className="text-paragraph">{project.fields.description}</p>
         <div className='w-max ml-auto space-x-2'>
-          <a href={project.fields.repositoryLink} target="_blank" rel="noreferrer" className="inline-block hover:opacity-75 p-1" aria-label='Source code' role="button" tabIndex={0}>
+          {project.fields.repositoryLink && project.fields.repositoryLink.length > 0 && (
+            <a href={project.fields.repositoryLink} target="_blank" rel="noreferrer" className="inline-block hover:opacity-75 p-1" aria-label='Source code' role="button" tabIndex={0}>
             <VscGithubAlt className="text-rose-500"/>
           </a>
+          )}
           <a href={project.fields.liveViewLink} target="_blank" rel="noreferrer" className="inline-block hover:opacity-75 p-1" aria-label='Live preview' role="button" tabIndex={0}>
             <BiLinkExternal className="text-rose-500"/>
           </a>
