@@ -1,4 +1,4 @@
-import { SiTailwindcss, SiJavascript, SiTypescript } from "react-icons/si";
+import {SiTailwindcss, SiJavascript, SiTypescript, SiRust, SiCsharp} from "react-icons/si";
 import { DiCss3 } from "react-icons/di";
 import { ImHtmlFive2 } from "react-icons/im";
 import { IoLogoPwa, IoLogoSass } from "react-icons/io5";
@@ -15,7 +15,9 @@ const tagToComponent = (tag: string) => {
     "CSS" : <DiCss3 size={25} className="hover:text-[#1572B6]"/>,
     "SCSS" : <IoLogoSass size={25} className="hover:text-[#CC6699]"/>,
     "GO": <BiLogoGoLang size={25} className="hover:text-[#00ADD8]"/>,
-    "TypeScript": <SiTypescript size={25} className="hover:text-[#007ACC]"/>
+    "TypeScript": <SiTypescript size={25} className="hover:text-[#007ACC]"/>,
+    "Rust": <SiRust size={25} className="hover:text-[#DEA584]"/>,
+    "CSharp": <SiCsharp size={25} className="hover:text-[#ff00ff]"/>
   }
 
   return tags[tag as keyof typeof tags]
