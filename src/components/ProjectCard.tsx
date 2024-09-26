@@ -54,9 +54,12 @@ function ProjectCard({ project }: { project: IProjects }) {
             <VscGithubAlt className="text-rose-500"/>
           </a>
           )}
-          <a href={project.fields.liveViewLink} target="_blank" rel="noreferrer" className="inline-block hover:opacity-75 p-1" aria-label='Live preview' role="button" tabIndex={0}>
-            <BiLinkExternal className="text-rose-500"/>
-          </a>
+          {project.fields.liveViewLink && project.fields.liveViewLink.length > 0 && (
+              <a href={project.fields.liveViewLink} target="_blank" rel="noreferrer"
+                 className="inline-block hover:opacity-75 p-1" aria-label='Live preview' role="button" tabIndex={0}>
+                <BiLinkExternal className="text-rose-500"/>
+              </a>)
+          }
         </div>
       </div>
     </motion.li>
@@ -64,7 +67,7 @@ function ProjectCard({ project }: { project: IProjects }) {
 }
 
 const container = {
-  hidden: { opacity: 0 },
+  hidden: {opacity: 0},
   show: {
     opacity: 1,
     transition: {
@@ -74,7 +77,7 @@ const container = {
 }
 
 const item = {
-  hidden: { opacity: 0, translateX: "-150%" },
+  hidden: {opacity: 0, translateX: "-150%" },
   show: { opacity: 1, translateX: 0, transition: {
     type: "tween" 
   }}
